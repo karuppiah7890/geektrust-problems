@@ -74,8 +74,10 @@ if err != nil {
 or similar where we mention what kind of error occurred and when and maybe how, so that the caller
 can fix the issue
 
-For now, any function in `main.go` will just exit directly. Any method or function in `pkg`
-would return errors though
+For now, any function in `main` package will just exit directly. Any method or function in `pkg`
+would return errors though. This way, `pkg` can be exposed to other programs and be used
+with different interfaces and `main` package functions and methods need not be reusable
+in other programs as they are CLI interface related implementation
 
 - How to test add driver method?
 

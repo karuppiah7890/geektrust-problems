@@ -32,6 +32,8 @@ func processFile(file *os.File) {
 			addDriver(rideSharingApp, lineNumber, argList[1:])
 
 		case "ADD_RIDER":
+			addRider(rideSharingApp, lineNumber, argList[1:])
+
 		case "MATCH":
 		case "START_RIDE":
 		case "STOP_RIDE":
