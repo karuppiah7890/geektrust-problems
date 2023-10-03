@@ -30,6 +30,14 @@ func processFile(file *os.File) {
 		switch command {
 		case "ADD_DRIVER":
 			addDriver(rideSharingApp, lineNumber, argList[1:])
+
+		case "ADD_RIDER":
+		case "MATCH":
+		case "START_RIDE":
+		case "STOP_RIDE":
+		case "BILL":
+		default:
+			panic(fmt.Sprintf("expected every line to contain a known command but found command %s in line %d. Known commands are ADD_DRIVER, ADD_RIDER, MATCH, START_RIDE, STOP_RIDE, BILL", command, lineNumber))
 		}
 
 		lineNumber++
