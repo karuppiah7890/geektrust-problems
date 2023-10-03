@@ -11,7 +11,7 @@ import (
 func addRider(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, argList []string) {
 	numberOfInputs := len(argList)
 	if numberOfInputs != 3 {
-		panic(fmt.Sprintf("expected exactly 3 inputs for add driver command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
+		panic(fmt.Sprintf("expected exactly 3 inputs for add rider command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
 	}
 
 	riderId := argList[0]
