@@ -5,10 +5,10 @@ import (
 	"geektrust/pkg"
 )
 
-func addDriver(rideSharingApp *pkg.RideSharingApp, lineNumber int, argList []string) {
+func addDriver(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, argList []string) {
 	numberOfInputs := len(argList)
 	if numberOfInputs != 3 {
-		panic(fmt.Sprintf("expected exactly 3 inputs for add driver command in line %d, but got %d inputs", lineNumber, numberOfInputs))
+		panic(fmt.Sprintf("expected exactly 3 inputs for add driver command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
 	}
 
 	driverId := argList[0]
@@ -27,6 +27,6 @@ func addDriver(rideSharingApp *pkg.RideSharingApp, lineNumber int, argList []str
 
 	err := rideSharingApp.AddDriver(input)
 	if err != nil {
-		panic(fmt.Sprintf("error occurred while adding driver in line %d: %v", lineNumber, err))
+		panic(fmt.Sprintf("error occurred while adding driver in line %d: %v", inputLineNumber, err))
 	}
 }
