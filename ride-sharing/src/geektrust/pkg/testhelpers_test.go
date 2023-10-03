@@ -13,3 +13,12 @@ func assertLocationEqual(t *testing.T, actual *pkg.Location, expected *pkg.Locat
 
 	return true
 }
+
+func assertIDEqual(t *testing.T, actual string, expected string) bool {
+	if actual != expected {
+		t.Errorf("expected the IDs to be equal but they were not. Actual: %v. Expected: %v", actual, expected)
+		return false
+	}
+
+	return true
+}

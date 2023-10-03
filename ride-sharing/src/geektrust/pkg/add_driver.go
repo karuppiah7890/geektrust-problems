@@ -13,6 +13,7 @@ func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
 	}
 
 	r.drivers[*input.DriverId] = &Driver{
+		ID: *input.DriverId,
 		Location: &Location{
 			X: input.Location.X,
 			Y: input.Location.Y,

@@ -3,7 +3,7 @@ package pkg
 import "fmt"
 
 type AddRiderInput struct {
-	RiderId *string
+	RiderId  *string
 	Location *Location
 }
 
@@ -13,6 +13,7 @@ func (r *RideSharingApp) AddRider(input *AddRiderInput) error {
 	}
 
 	r.riders[*input.RiderId] = &Rider{
+		ID: *input.RiderId,
 		Location: &Location{
 			X: input.Location.X,
 			Y: input.Location.Y,

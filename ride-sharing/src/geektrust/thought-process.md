@@ -89,3 +89,24 @@ Or same test can be used to check both add driver and get driver. Hmm
 
 `GetDriver` is a very basic method. `AddDriver` is also a very basic method, but more than
 `GetDriver`. We can add test for `AddDriver` method alone
+
+- Should we have driver ID in `Driver`? and rider ID in `Rider`?
+
+I mean, if we are returning rider, or driver somewhere, as of now there's no ID as part of
+the rider or driver. The ID is stored at the ride sharing app level, as part of the map's
+key. Hmm. Maybe it's a good idea to add ID to the fields of rider and driver, this way, a
+rider or a driver is a standalone thing
+
+- Should we really have `AddDriverInput` and `AddRiderInput`? Or just use `Driver` and `Rider`?
+Hmm. We can just use `Driver` as the input for `AddDriver` and `Rider` as input for `AddRider`.
+Why do this? A few good things - tests can use `Driver` and `Rider` directly or we might end
+up creating a separate `Driver` and `Rider` in test package with ID too as field, but if the
+previous point is done then we can reuse the `Driver` and `Rider` in `pkg` as the `Driver`
+and `Rider` itself will have ID. A few bad things about reusing `Driver` and `Rider` instead
+of `AddDriverInput` and `AddRiderInput` is - later, when input changes, we might have to
+have separate representation for input and separate representation at ride sharing app
+level. Also, the outside interface should be stable and not keep changing, hmm. If we
+merge them and use `Driver` for input and for storage, then it could change later and
+break things and we will have to make breaking changes. Depends on what kind of features
+and fields come up later and how we structure the input for it and how we would look at
+it from ride sharing app store level. Hmm
