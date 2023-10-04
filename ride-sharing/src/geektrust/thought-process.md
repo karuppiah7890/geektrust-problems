@@ -110,3 +110,70 @@ merge them and use `Driver` for input and for storage, then it could change late
 break things and we will have to make breaking changes. Depends on what kind of features
 and fields come up later and how we structure the input for it and how we would look at
 it from ride sharing app store level. Hmm
+
+- What are the different error outputs?
+
+`INVALID_RIDE`
+
+`RIDE_NOT_COMPLETED`
+
+- When do the different error outputs happen?
+
+When `START_RIDE` is called with `N` (1 <= N <= 5) but the `MATCH` has fewer than N matches, or
+when the driver is not available, or the given ride ID already exists (ride ID has to be unique),
+then print `INVALID_RIDE`
+
+When `STOP_RIDE` is called but the given ride ID does not exist or if the ride has already
+been stopped, then print `INVALID_RIDE`
+
+When `BILL` is called but the ride ID does not exist, then print `INVALID_RIDE`
+
+When `BILL` is called but the ride for which `BILL` has been called has not completed
+using `STOP_RIDE`, then `RIDE_NOT_COMPLETED` error comes
+
+- What does driver is not available mean?
+
+There are no drivers nearby in the 5 km distance. Or there are no drivers who are available to
+drive since they are occupied with existing rides, though they are within the 5 km distance
+
+The question does not talk about this though - about driver(s) being occupied with existing ride(s)
+
+- How to store all the rides?
+
+All rides can be stored a list of rides represented with a `map` in golang with ride ID as key.
+This will help us ensure that the ride ID is unique. Once a ride is stopped, we gotta remove the
+ride ID and the ride from the list of rides.
+
+We will also store the ride ID in the driver and rider, in case they are on a ride, or else it
+will be empty. We can use a pointer to string and have `nil` for no ride and have a pointer to
+a string (ride id) for cases when they are on a ride
+
+- Matching rides - give all outputs at `pkg` level? All drivers within 5km distance,
+instead of just 5, and then cap it to 5 at `main` level? Hmm 🤔💭🤨🧐. We can start
+with this. Later we can customize it if needed and cap it at `pkg` level itself
+
+And even the 5km distance - take it as an input at `pkg` level? Hmm, makes sense
+
+- Should the field be named `RiderId` or just `ID`, for the `AddRiderInput` struct?
+Same thought for `DriverId` vs `ID` for `AddDriverInput` struct
+
+For now this okay. We can change it later if needed. This brings us back to the
+question of merging `AddRiderInput` and `Rider` and just using `Rider`
+instead of two separate structs, and merging `AddDriverInput` and
+`Driver` and just using `Driver` instead of two separate structs
+
+- Should we remember the matches done as part of `MATCH` command? or just run
+`MATCH` on demand? 🤔 But if we run match on demand, we may notice a different
+output. For example if a driver from old output started ride, they may not
+be seen in the new on-demand match output. Also, in such a case, where on-demand
+match is run the user may end up choosing a driver ID that they didn't intend to
+because they chose from old output and we are starting ride on a driver from new
+output that's not shown to the user. If we remember the old output,
+then we can get the value from it while doing `START_RIDE`, but if the driver
+is not available because they started another ride, then we should give
+`INVALID_RIDE` as output I guess?
+
+Yeah, I think we should just remember the old output for the corresponding rider,
+so that we know which driver to choose when they say `START_RIDE`, instead of
+running another `MATCH` behind the scenes during the processing of `START_RIDE`,
+which will cause unnecessary confusion for the user using the system
