@@ -9,6 +9,7 @@ import (
 )
 
 func processFile(file *os.File) {
+	c := newContext()
 	rideSharingApp := pkg.NewRideSharingApp()
 
 	scanner := bufio.NewScanner(file)
@@ -35,6 +36,8 @@ func processFile(file *os.File) {
 			addRider(rideSharingApp, inputLineNumber, argList[1:])
 
 		case "MATCH":
+			match(c, rideSharingApp, inputLineNumber, argList[1:])
+
 		case "START_RIDE":
 		case "STOP_RIDE":
 		case "BILL":
