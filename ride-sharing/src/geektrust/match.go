@@ -28,6 +28,7 @@ func match(c context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, a
 	}
 
 	if len(idsOfMatchedDrivers) == 0 {
+		c.storeDriverOptionsForRider(riderId, idsOfMatchedDrivers)
 		fmt.Println("NO_DRIVERS_AVAILABLE")
 	} else {
 		c.storeDriverOptionsForRider(riderId, idsOfMatchedDrivers)
