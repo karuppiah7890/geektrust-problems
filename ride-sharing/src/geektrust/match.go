@@ -8,13 +8,13 @@ import (
 const RADIUS_IN_KM = 5
 const MAX_MATCHED_DRIVERS = 5
 
-func match(c context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, argList []string) {
-	numberOfInputs := len(argList)
+func match(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
+	numberOfInputs := len(commandInput)
 	if numberOfInputs != 1 {
 		panic(fmt.Sprintf("expected exactly 1 inputs for match command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
 	}
 
-	riderId := argList[0]
+	riderId := commandInput[0]
 
 	input := &pkg.MatchRiderWithDriverInput{
 		RiderId:    riderId,

@@ -27,18 +27,21 @@ func processFile(file *os.File) {
 		}
 
 		command := argList[0]
+		commandInput := argList[1:]
 
 		switch command {
 		case "ADD_DRIVER":
-			addDriver(rideSharingApp, inputLineNumber, argList[1:])
+			addDriver(rideSharingApp, inputLineNumber, commandInput)
 
 		case "ADD_RIDER":
-			addRider(rideSharingApp, inputLineNumber, argList[1:])
+			addRider(rideSharingApp, inputLineNumber, commandInput)
 
 		case "MATCH":
-			match(c, rideSharingApp, inputLineNumber, argList[1:])
+			match(c, rideSharingApp, inputLineNumber, commandInput)
 
 		case "START_RIDE":
+			startRide(c, rideSharingApp, inputLineNumber, commandInput)
+
 		case "STOP_RIDE":
 		case "BILL":
 		default:

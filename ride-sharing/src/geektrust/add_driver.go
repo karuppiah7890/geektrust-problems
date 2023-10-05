@@ -5,15 +5,15 @@ import (
 	"geektrust/pkg"
 )
 
-func addDriver(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, argList []string) {
-	numberOfInputs := len(argList)
+func addDriver(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
+	numberOfInputs := len(commandInput)
 	if numberOfInputs != 3 {
 		panic(fmt.Sprintf("expected exactly 3 inputs for add driver command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
 	}
 
-	driverId := argList[0]
-	x := parseCoordinate(argList[1])
-	y := parseCoordinate(argList[2])
+	driverId := commandInput[0]
+	x := parseCoordinate(commandInput[1])
+	y := parseCoordinate(commandInput[2])
 
 	location := pkg.Location{
 		X: x,

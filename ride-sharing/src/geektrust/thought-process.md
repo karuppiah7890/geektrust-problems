@@ -285,9 +285,20 @@ In order to understand the current ride the driver is on, the
 ride sharing app will also store the ride id (not the whole ride here)
 as part of the driver details. The same is done for the rider too :)
 
+- How to handle errors at caller side when the list of errors are known
+at implementation side? as a black box implementation? or just handle
+based on the known information?
+
 ---
 
 TODO:
+- Too many `panic`s all over the code. Check if the usage is correct and if and where
+  `recover` would be required
+- rename `context` in `main` package to `database`? or `db`?
+    - as it's more of a database storing stuff
+- Simplify code at `main` package level
+    - `start_ride.go` is very messy
+- Better error handling for different scenarios
 - Integration testing
 - Defining named errors like `RiderNotFound`, `DriverNotFound`, that can be used by callers to
 understand what's the problem / error, and accordingly to show output, instead of just saying

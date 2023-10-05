@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type context struct {
 	riderDetails *riderDetails
 }
@@ -8,12 +10,22 @@ type riderDetails struct {
 	driverOptionsForRider map[string][]string
 }
 
-func newContext() context {
-	return context{
+func newContext() *context {
+	return &context{
 		riderDetails: &riderDetails{
 			driverOptionsForRider: make(map[string][]string),
 		},
 	}
+}
+
+func (c *context) getDriverOptionsForRider(riderId string) ([]string, error) {
+	checkContext(c)
+	driverOptions, ok := c.riderDetails.driverOptionsForRider[riderId]
+	if !ok {
+		return nil, DriverOptionsUnavailableForRider(fmt.Sprintf("driver options are unavailable for rider id %v", riderId))
+	}
+
+	return driverOptions, nil
 }
 
 func (c *context) storeDriverOptionsForRider(riderId string, driverOptions []string) {
