@@ -177,3 +177,28 @@ Yeah, I think we should just remember the old output for the corresponding rider
 so that we know which driver to choose when they say `START_RIDE`, instead of
 running another `MATCH` behind the scenes during the processing of `START_RIDE`,
 which will cause unnecessary confusion for the user using the system
+
+- Testing
+
+Apart from unit testing, run some integration tests to check if things work end to end,
+and also to test the logic inside `main` package. Or else write tests at `main` package
+level too! :) Unit tests. Integration and E2E tests can be a few, compared to unit tests.
+That way, the tests are maintainable and easy to change when code changes
+
+- When and where to use pointers and where not to use pointers?
+
+Mostly I have used pointers to reduce memory usage - as a lot of times structs are
+being used in function arguments and passed around, and this would cause copying
+the struct everytime if it's a struct, so a pointer to struct makes the copy
+light weight as it has to copy only the memory address / reference to the struct
+and not the whole struct itself
+
+---
+
+TODO:
+- Integration testing
+- Defining named errors like `RiderNotFound`, `DriverNotFound`, that can be used by callers to
+understand what's the problem / error, and accordingly to show output, instead of just saying
+"error occurred" in a generic manner, and also give any specific output, like `Invalid Rider ID`,
+`Invalid Driver ID` etc
+- Check pointer usage all across the program code
