@@ -305,3 +305,5 @@ understand what's the problem / error, and accordingly to show output, instead o
 "error occurred" in a generic manner, and also give any specific output, like `Invalid Rider ID`,
 `Invalid Driver ID` etc
 - Check pointer usage all across the program code
+    - Too many pointers are used. In some places it's inconsistent - some input structs have pointer
+    fields while others have normal fields. why?

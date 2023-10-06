@@ -24,9 +24,9 @@ type MatchedDrivers []*MatchedDriver
 // equidistant, it will return them in lexicographical order.
 func (r *RideSharingApp) MatchRiderWithDriver(input *MatchRiderWithDriverInput) ([]string, error) {
 	riderId := input.RiderId
-	rider, err := r.GetRider(riderId)
-	if err != nil {
-		return nil, fmt.Errorf("error occurred while getting rider with id %s: %v", riderId, err)
+	rider, ok := r.GetRider(riderId)
+	if !ok {
+		return nil, fmt.Errorf("could not get rider with id %s: %w", riderId, ErrRiderIdNotExist)
 	}
 
 	matchedDrivers := make(MatchedDrivers, 0)
