@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"geektrust/pkg"
 	"strconv"
@@ -41,9 +42,9 @@ func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber i
 
 	err = rideSharingApp.StartRide(input)
 	if err != nil {
-		_, ok := err.(pkg.RideIdAlreadyExists)
-		if ok {
+		if isKnownError(err) {
 			fmt.Println(INVALID_RIDE)
+			return
 		} else {
 			panic(fmt.Sprintf("unknown error occurred while starting ride for rider id %v in line %d, driver id %v, ride id %v: %v", riderId, inputLineNumber, driverId, rideId, err))
 		}
@@ -54,11 +55,18 @@ func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber i
 	fmt.Printf("%v %v\n", RIDE_STARTED, rideId)
 }
 
+func isKnownError(err error) bool {
+	return errors.Is(err, pkg.ErrRideIdExist) ||
+		errors.Is(err, pkg.ErrDriverIdNotExist) ||
+		errors.Is(err, pkg.ErrDriverNotAvailable) ||
+		errors.Is(err, pkg.ErrRiderIdNotExist) ||
+		errors.Is(err, pkg.ErrRiderOnRide)
+}
+
 func getDriverIdFromOptions(c *context, riderId string, optionNumber int64) *string {
 	driverOptions, err := c.getDriverOptionsForRider(riderId)
 	if err != nil {
-		_, ok := err.(DriverOptionsUnavailableForRider)
-		if ok {
+		if errors.Is(err, ErrDriverOptionsUnavailable) {
 			panic(fmt.Sprintf("driver options unavailable error occurred: %v. maybe MATCH command was not called first", err))
 		} else {
 			panic(fmt.Sprintf("unknown error occurred while getting driver options for rider: %v", err))

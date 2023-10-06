@@ -1,7 +1,5 @@
 package main
 
-type DriverOptionsUnavailableForRider string
+import "errors"
 
-func (d DriverOptionsUnavailableForRider) Error() string {
-	return string(d)
-}
+var ErrDriverOptionsUnavailable = errors.New("driver options unavailable for rider")

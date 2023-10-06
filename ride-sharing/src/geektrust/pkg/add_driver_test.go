@@ -26,9 +26,9 @@ func TestAddDriver(t *testing.T) {
 			t.Errorf("expected no error occur while adding driver but got error: %v", err)
 		}
 
-		driver, err := rideSharingApp.GetDriver(driverId)
-		if err != nil {
-			t.Errorf("expected no error occur while getting driver but got error: %v", err)
+		driver, ok := rideSharingApp.GetDriver(driverId)
+		if !ok {
+			t.Errorf("could not get driver with driver id %v", driverId)
 		}
 
 		assertLocationEqual(t, driver.Location, location)

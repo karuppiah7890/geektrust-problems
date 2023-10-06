@@ -7,6 +7,8 @@ import (
 
 const RADIUS_IN_KM = 5
 const MAX_MATCHED_DRIVERS = 5
+const NO_DRIVERS_AVAILABLE = "NO_DRIVERS_AVAILABLE"
+const DRIVERS_MATCHED = "DRIVERS_MATCHED"
 
 func match(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
 	numberOfInputs := len(commandInput)
@@ -29,10 +31,10 @@ func match(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, 
 
 	if len(idsOfMatchedDrivers) == 0 {
 		c.storeDriverOptionsForRider(riderId, idsOfMatchedDrivers)
-		fmt.Println("NO_DRIVERS_AVAILABLE")
+		fmt.Println(NO_DRIVERS_AVAILABLE)
 	} else {
 		c.storeDriverOptionsForRider(riderId, idsOfMatchedDrivers)
-		fmt.Print("DRIVERS_MATCHED")
+		fmt.Print(DRIVERS_MATCHED)
 		for _, driverId := range idsOfMatchedDrivers {
 			fmt.Printf(" %s", driverId)
 		}

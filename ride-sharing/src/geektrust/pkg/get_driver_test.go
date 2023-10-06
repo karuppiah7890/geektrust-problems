@@ -11,19 +11,13 @@ func TestGetDriver(t *testing.T) {
 
 		driverId := "D1"
 
-		driver, err := rideSharingApp.GetDriver(driverId)
-		if err == nil {
-			t.Error("expected error to occur while getting driver with driver id that does not exist but got no error")
+		driver, ok := rideSharingApp.GetDriver(driverId)
+		if ok {
+			t.Errorf("expected to not get a driver with driver id %v as driver id does not exist, but got a driver", driverId)
 		}
 
 		if driver != nil {
 			t.Errorf("expected driver to be nil but got %v", driver)
-		}
-
-		expectedError := "driver with id D1 does not exist"
-
-		if err.Error() != expectedError {
-			t.Errorf("expected the error to be equal. Actual: %s. Expected: %s", err.Error(), expectedError)
 		}
 	})
 }

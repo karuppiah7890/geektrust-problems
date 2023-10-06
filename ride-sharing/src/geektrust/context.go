@@ -22,7 +22,7 @@ func (c *context) getDriverOptionsForRider(riderId string) ([]string, error) {
 	checkContext(c)
 	driverOptions, ok := c.riderDetails.driverOptionsForRider[riderId]
 	if !ok {
-		return nil, DriverOptionsUnavailableForRider(fmt.Sprintf("driver options are unavailable for rider id %v", riderId))
+		return nil, fmt.Errorf("driver options are unavailable for rider id %v: %w", riderId, ErrDriverOptionsUnavailable)
 	}
 
 	return driverOptions, nil
