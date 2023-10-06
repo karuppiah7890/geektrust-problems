@@ -18,6 +18,7 @@ func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
 			X: input.Location.X,
 			Y: input.Location.Y,
 		},
+		isAvailableForRide: true,
 	}
 
 	return nil
