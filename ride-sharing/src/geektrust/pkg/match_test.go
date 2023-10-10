@@ -92,23 +92,3 @@ func TestMatchRiderWithDriver(t *testing.T) {
 		}
 	})
 }
-
-func driver(driverId string, x float64, y float64) *pkg.Driver {
-	return &pkg.Driver{
-		ID: driverId,
-		Location: &pkg.Location{
-			X: x,
-			Y: y,
-		},
-	}
-}
-
-func rider(riderId string, x float64, y float64) *pkg.Rider {
-	return &pkg.Rider{
-		ID: riderId,
-		Location: &pkg.Location{
-			X: x,
-			Y: y,
-		},
-	}
-}
