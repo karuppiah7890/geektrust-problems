@@ -13,7 +13,7 @@ const RIDE_STARTED = "RIDE_STARTED"
 func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
 	numberOfInputs := len(commandInput)
 	if numberOfInputs != 3 {
-		panic(fmt.Sprintf("expected exactly 3 inputs for match command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
+		panic(fmt.Sprintf("expected exactly 3 inputs for start ride command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
 	}
 
 	rideId := commandInput[0]
