@@ -32,7 +32,7 @@ func TestAddDriver(t *testing.T) {
 		}
 
 		assertLocationEqual(t, driver.Location, location)
-		assertIDEqual(t, driver.ID, driverId)
+		assertStringEqual(t, driver.ID, driverId)
 	})
 
 	t.Run("fail when adding a driver with driver id that already exists", func(t *testing.T) {

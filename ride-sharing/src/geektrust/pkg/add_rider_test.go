@@ -32,7 +32,7 @@ func TestAddRider(t *testing.T) {
 		}
 
 		assertLocationEqual(t, rider.Location, location)
-		assertIDEqual(t, rider.ID, riderId)
+		assertStringEqual(t, rider.ID, riderId)
 	})
 
 	t.Run("fail when adding a rider with rider id that already exists", func(t *testing.T) {
