@@ -11,19 +11,13 @@ func TestGetRider(t *testing.T) {
 
 		riderId := "R1"
 
-		rider, err := rideSharingApp.GetRider(riderId)
-		if err == nil {
-			t.Error("expected error to occur while getting rider with rider id that does not exist but got no error")
+		rider, ok := rideSharingApp.GetRider(riderId)
+		if ok {
+			t.Errorf("expected to not get rider with rider id %v that does not exist but got one rider: %v", riderId, rider)
 		}
 
 		if rider != nil {
 			t.Errorf("expected rider to be nil but got %v", rider)
-		}
-
-		expectedError := "rider with id R1 does not exist"
-
-		if err.Error() != expectedError {
-			t.Errorf("expected the error to be equal. Actual: %s. Expected: %s", err.Error(), expectedError)
 		}
 	})
 }

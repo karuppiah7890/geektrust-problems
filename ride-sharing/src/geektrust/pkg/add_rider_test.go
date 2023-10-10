@@ -26,9 +26,9 @@ func TestAddRider(t *testing.T) {
 			t.Errorf("expected no error occur while adding rider but got error: %v", err)
 		}
 
-		rider, err := rideSharingApp.GetRider(riderId)
-		if err != nil {
-			t.Errorf("expected no error occur while getting rider but got error: %v", err)
+		rider, ok := rideSharingApp.GetRider(riderId)
+		if !ok {
+			t.Errorf("expected to get rider for rider id %v but got none", riderId)
 		}
 
 		assertLocationEqual(t, rider.Location, location)
