@@ -5,3 +5,7 @@ type Rider struct {
 	Location *Location
 	isOnRide bool
 }
+
+func (r *Rider) IsOnRide() bool {
+	return r.isOnRide
+}

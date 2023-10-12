@@ -43,6 +43,8 @@ func processFile(file *os.File) {
 			startRide(c, rideSharingApp, inputLineNumber, commandInput)
 
 		case "STOP_RIDE":
+			stopRide(c, rideSharingApp, inputLineNumber, commandInput)
+
 		case "BILL":
 		default:
 			panic(fmt.Sprintf("expected every line to contain a known command but found command %s in line %d. Known commands are ADD_DRIVER, ADD_RIDER, MATCH, START_RIDE, STOP_RIDE, BILL", command, inputLineNumber))

@@ -48,8 +48,21 @@ func TestStartRide(t *testing.T) {
 		assertStringEqual(t, ride.GetId(), rideId)
 		assertStringEqual(t, ride.GetRiderId(), riderId)
 		assertStringEqual(t, ride.GetDriverId(), driverId)
-		assertStringEqual(t, ride.GetDriverId(), driverId)
 		assertBoolEqual(t, ride.IsComplete(), false)
+
+		driver, ok := rideSharingApp.GetDriver(driverId)
+		if !ok {
+			t.Errorf("expected to get driver with id %s but got none", driverId)
+		}
+
+		assertBoolEqual(t, driver.IsAvailableForRide(), false)
+
+		rider, ok := rideSharingApp.GetRider(riderId)
+		if !ok {
+			t.Errorf("expected to get rider with id %s but got none", riderId)
+		}
+
+		assertBoolEqual(t, rider.IsOnRide(), true)
 	})
 	t.Run("invalid ride cases", func(t *testing.T) {
 		t.Run("ride id already exists", func(t *testing.T) {

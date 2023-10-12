@@ -4,6 +4,10 @@ import "errors"
 
 var ErrRideIdExist = errors.New("ride id already exists")
 
+var ErrRideIdNotExist = errors.New("ride id does not exist")
+
+var ErrRideStopped = errors.New("ride is already stopped")
+
 var ErrDriverIdNotExist = errors.New("driver id does not exist")
 
 var ErrDriverNotAvailable = errors.New("driver is not available for a ride")

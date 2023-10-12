@@ -42,7 +42,7 @@ func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber i
 
 	err = rideSharingApp.StartRide(input)
 	if err != nil {
-		if isKnownError(err) {
+		if isKnownErrorForStartRide(err) {
 			fmt.Println(INVALID_RIDE)
 			return
 		} else {
@@ -55,7 +55,7 @@ func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber i
 	fmt.Printf("%v %v\n", RIDE_STARTED, rideId)
 }
 
-func isKnownError(err error) bool {
+func isKnownErrorForStartRide(err error) bool {
 	return errors.Is(err, pkg.ErrRideIdExist) ||
 		errors.Is(err, pkg.ErrDriverIdNotExist) ||
 		errors.Is(err, pkg.ErrDriverNotAvailable) ||
