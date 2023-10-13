@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"geektrust/pkg"
+	"geektrust/pkg/location"
 )
 
 // TODO: This is kind of like similar/duplicate logic when compared to add driver logic.
@@ -18,11 +19,11 @@ func addRider(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandIn
 	x := parseCoordinate(commandInput[1])
 	y := parseCoordinate(commandInput[2])
 
-	location := pkg.NewLocation(x, y)
+	loc := location.New(x, y)
 
 	input := &pkg.AddRiderInput{
 		RiderId:  riderId,
-		Location: location,
+		Location: loc,
 	}
 
 	err := rideSharingApp.AddRider(input)

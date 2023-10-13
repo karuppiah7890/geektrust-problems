@@ -1,11 +1,11 @@
-package pkg
+package location
 
 type Location struct {
 	x float64
 	y float64
 }
 
-func NewLocation(x float64, y float64) *Location {
+func New(x float64, y float64) *Location {
 	return &Location{
 		x: x,
 		y: y,

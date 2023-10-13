@@ -2,6 +2,7 @@ package pkg_test
 
 import (
 	"geektrust/pkg"
+	"geektrust/pkg/location"
 	"testing"
 )
 
@@ -11,11 +12,11 @@ func TestAddRider(t *testing.T) {
 
 		riderId := "R1"
 
-		location := pkg.NewLocation(1, 1)
+		loc := location.New(1, 1)
 
 		input := &pkg.AddRiderInput{
 			RiderId:  riderId,
-			Location: location,
+			Location: loc,
 		}
 
 		err := rideSharingApp.AddRider(input)
@@ -28,7 +29,7 @@ func TestAddRider(t *testing.T) {
 			t.Errorf("expected to get rider for rider id %v but got none", riderId)
 		}
 
-		assertLocationEqual(t, rider.Location, location)
+		assertLocationEqual(t, rider.Location, loc)
 		assertStringEqual(t, rider.ID, riderId)
 	})
 
@@ -37,11 +38,11 @@ func TestAddRider(t *testing.T) {
 
 		riderId := "R1"
 
-		location := pkg.NewLocation(1, 1)
+		loc := location.New(1, 1)
 
 		input := &pkg.AddRiderInput{
 			RiderId:  riderId,
-			Location: location,
+			Location: loc,
 		}
 
 		err := rideSharingApp.AddRider(input)

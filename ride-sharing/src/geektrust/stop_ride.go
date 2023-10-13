@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"geektrust/pkg"
+	"geektrust/pkg/location"
 	"strconv"
 )
 
@@ -25,8 +26,8 @@ func stopRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber in
 	timeTakenInMinutes := stringToInt(timeTakenInMinutesStr, "time taken in minutes")
 
 	input := &pkg.StopRideInput{
-		RideId: rideId,
-		Destination: pkg.NewLocation(destinationX, destinationY),
+		RideId:             rideId,
+		Destination:        location.New(destinationX, destinationY),
 		TimeTakenInMinutes: timeTakenInMinutes,
 	}
 

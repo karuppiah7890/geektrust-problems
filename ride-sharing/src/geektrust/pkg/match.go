@@ -3,6 +3,7 @@ package pkg
 import (
 	"container/heap"
 	"fmt"
+	"geektrust/pkg/location"
 	"math"
 )
 
@@ -77,7 +78,7 @@ func min(x, y int) int {
 	return y
 }
 
-func distanceBetween(location *Location, anotherLocation *Location) float64 {
+func distanceBetween(location *location.Location, anotherLocation *location.Location) float64 {
 	// Euclidean distance formula: SquareRoot( (x2 - x1)^2 + (y2 - y1)^2 )
 	return squareRoot(square(anotherLocation.GetX()-location.GetX()) + square(anotherLocation.GetY()-location.GetY()))
 }

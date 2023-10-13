@@ -1,8 +1,10 @@
 package pkg
 
+import "geektrust/pkg/location"
+
 type Rider struct {
 	ID       string
-	Location *Location
+	Location *location.Location
 	isOnRide bool
 }
 

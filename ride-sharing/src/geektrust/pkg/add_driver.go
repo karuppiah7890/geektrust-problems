@@ -1,10 +1,13 @@
 package pkg
 
-import "fmt"
+import (
+	"fmt"
+	"geektrust/pkg/location"
+)
 
 type AddDriverInput struct {
 	DriverId string
-	Location *Location
+	Location *location.Location
 }
 
 func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
@@ -14,9 +17,9 @@ func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
 		return fmt.Errorf("a driver with id %s already exists", driverId)
 	}
 
-	location := input.Location.Clone()
+	loc := input.Location.Clone()
 
-	r.drivers[driverId] = NewDriver(driverId, location, true)
+	r.drivers[driverId] = NewDriver(driverId, loc, true)
 
 	return nil
 }

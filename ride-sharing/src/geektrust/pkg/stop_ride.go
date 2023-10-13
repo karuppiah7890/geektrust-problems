@@ -1,10 +1,13 @@
 package pkg
 
-import "fmt"
+import (
+	"fmt"
+	"geektrust/pkg/location"
+)
 
 type StopRideInput struct {
 	RideId             string
-	Destination        *Location
+	Destination        *location.Location
 	TimeTakenInMinutes int
 }
 

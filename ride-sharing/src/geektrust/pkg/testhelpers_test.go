@@ -2,10 +2,11 @@ package pkg_test
 
 import (
 	"geektrust/pkg"
+	"geektrust/pkg/location"
 	"testing"
 )
 
-func assertLocationEqual(t *testing.T, actual *pkg.Location, expected *pkg.Location) bool {
+func assertLocationEqual(t *testing.T, actual *location.Location, expected *location.Location) bool {
 	if !actual.Equals(expected) {
 		t.Errorf("expected the locations to be equal but they were not. Actual: (%v, %v). Expected: (%v, %v)", actual.GetX(), actual.GetY(), expected.GetX(), expected.GetY())
 		return false
@@ -85,13 +86,13 @@ func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *pkg.Rider
 }
 
 func driver(driverId string, x float64, y float64) *pkg.Driver {
-	location := pkg.NewLocation(x, y)
-	return pkg.NewDriver(driverId, location, true)
+	loc := location.New(x, y)
+	return pkg.NewDriver(driverId, loc, true)
 }
 
 func rider(riderId string, x float64, y float64) *pkg.Rider {
 	return &pkg.Rider{
 		ID:       riderId,
-		Location: pkg.NewLocation(x, y),
+		Location: location.New(x, y),
 	}
 }

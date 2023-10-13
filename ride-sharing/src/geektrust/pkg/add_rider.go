@@ -1,10 +1,13 @@
 package pkg
 
-import "fmt"
+import (
+	"fmt"
+	"geektrust/pkg/location"
+)
 
 type AddRiderInput struct {
 	RiderId  string
-	Location *Location
+	Location *location.Location
 }
 
 func (r *RideSharingApp) AddRider(input *AddRiderInput) error {

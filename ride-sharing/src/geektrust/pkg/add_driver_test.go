@@ -2,6 +2,7 @@ package pkg_test
 
 import (
 	"geektrust/pkg"
+	"geektrust/pkg/location"
 	"testing"
 )
 
@@ -11,11 +12,11 @@ func TestAddDriver(t *testing.T) {
 
 		driverId := "D1"
 
-		location := pkg.NewLocation(1, 1)
+		loc := location.New(1, 1)
 
 		input := &pkg.AddDriverInput{
 			DriverId: driverId,
-			Location: location,
+			Location: loc,
 		}
 
 		err := rideSharingApp.AddDriver(input)
@@ -28,7 +29,7 @@ func TestAddDriver(t *testing.T) {
 			t.Errorf("could not get driver with driver id %v", driverId)
 		}
 
-		assertLocationEqual(t, driver.GetLocation(), location)
+		assertLocationEqual(t, driver.GetLocation(), loc)
 		assertStringEqual(t, driver.GetID(), driverId)
 	})
 
@@ -37,11 +38,11 @@ func TestAddDriver(t *testing.T) {
 
 		driverId := "D1"
 
-		location := pkg.NewLocation(1, 1)
+		loc := location.New(1, 1)
 
 		input := &pkg.AddDriverInput{
 			DriverId: driverId,
-			Location: location,
+			Location: loc,
 		}
 
 		err := rideSharingApp.AddDriver(input)

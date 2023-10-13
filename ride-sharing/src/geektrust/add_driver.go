@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"geektrust/pkg"
+	"geektrust/pkg/location"
 )
 
 func addDriver(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
@@ -15,11 +16,11 @@ func addDriver(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandI
 	x := parseCoordinate(commandInput[1])
 	y := parseCoordinate(commandInput[2])
 
-	location := pkg.NewLocation(x, y)
+	loc := location.New(x, y)
 
 	input := &pkg.AddDriverInput{
 		DriverId: driverId,
-		Location: location,
+		Location: loc,
 	}
 
 	err := rideSharingApp.AddDriver(input)

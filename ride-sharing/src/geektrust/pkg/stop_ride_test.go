@@ -3,6 +3,7 @@ package pkg_test
 import (
 	"errors"
 	"geektrust/pkg"
+	"geektrust/pkg/location"
 	"testing"
 )
 
@@ -32,8 +33,8 @@ func TestStopRide(t *testing.T) {
 		}
 
 		stopRideInput := &pkg.StopRideInput{
-			RideId: rideId,
-			Destination: pkg.NewLocation(4, 5),
+			RideId:             rideId,
+			Destination:        location.New(4, 5),
 			TimeTakenInMinutes: 32,
 		}
 
@@ -74,8 +75,8 @@ func TestStopRide(t *testing.T) {
 			rideId := "RIDE-999"
 
 			input := &pkg.StopRideInput{
-				RideId: rideId,
-				Destination: pkg.NewLocation(40, 50),
+				RideId:             rideId,
+				Destination:        location.New(40, 50),
 				TimeTakenInMinutes: 25,
 			}
 
@@ -115,8 +116,8 @@ func TestStopRide(t *testing.T) {
 			}
 
 			stopRideInput := &pkg.StopRideInput{
-				RideId: rideId,
-				Destination: pkg.NewLocation(4, 5),
+				RideId:             rideId,
+				Destination:        location.New(4, 5),
 				TimeTakenInMinutes: 32,
 			}
 

@@ -1,20 +1,22 @@
 package pkg
 
+import "geektrust/pkg/location"
+
 type Driver struct {
 	id                 string
-	location           *Location
+	location           *location.Location
 	isAvailableForRide bool
 }
 
-func NewDriver(id string, location *Location, isAvailableForRide bool) *Driver {
+func NewDriver(id string, location *location.Location, isAvailableForRide bool) *Driver {
 	return &Driver{
-		id: id,
-		location: location,
+		id:                 id,
+		location:           location,
 		isAvailableForRide: isAvailableForRide,
 	}
 }
 
-func (d *Driver) GetLocation() *Location {
+func (d *Driver) GetLocation() *location.Location {
 	return d.location
 }
 
