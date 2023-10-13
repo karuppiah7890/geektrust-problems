@@ -3,17 +3,19 @@ package pkg
 import "fmt"
 
 type AddRiderInput struct {
-	RiderId  *string
+	RiderId  string
 	Location *Location
 }
 
 func (r *RideSharingApp) AddRider(input *AddRiderInput) error {
-	if _, ok := r.riders[*input.RiderId]; ok {
-		return fmt.Errorf("a rider with id %s already exists", *input.RiderId)
+	riderId := input.RiderId
+
+	if _, ok := r.riders[riderId]; ok {
+		return fmt.Errorf("a rider with id %s already exists", riderId)
 	}
 
-	r.riders[*input.RiderId] = &Rider{
-		ID: *input.RiderId,
+	r.riders[riderId] = &Rider{
+		ID: riderId,
 		Location: &Location{
 			X: input.Location.X,
 			Y: input.Location.Y,

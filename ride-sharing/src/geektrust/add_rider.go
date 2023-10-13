@@ -24,7 +24,7 @@ func addRider(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandIn
 	}
 
 	input := &pkg.AddRiderInput{
-		RiderId:  &riderId,
+		RiderId:  riderId,
 		Location: &location,
 	}
 

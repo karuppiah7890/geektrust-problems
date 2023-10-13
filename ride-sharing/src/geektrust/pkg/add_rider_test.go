@@ -17,7 +17,7 @@ func TestAddRider(t *testing.T) {
 		}
 
 		input := &pkg.AddRiderInput{
-			RiderId:  &riderId,
+			RiderId:  riderId,
 			Location: location,
 		}
 
@@ -46,7 +46,7 @@ func TestAddRider(t *testing.T) {
 		}
 
 		input := &pkg.AddRiderInput{
-			RiderId:  &riderId,
+			RiderId:  riderId,
 			Location: location,
 		}
 

@@ -84,7 +84,7 @@ func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *pkg.Rider
 	}
 
 	input := &pkg.AddRiderInput{
-		RiderId:  &rider.ID,
+		RiderId:  rider.ID,
 		Location: location,
 	}
 
