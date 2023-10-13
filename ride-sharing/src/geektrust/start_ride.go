@@ -27,16 +27,16 @@ func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber i
 
 	riderId := commandInput[2]
 
-	driverId := getDriverIdFromOptions(c, riderId, driverOptionNumber)
+	driverId, ok := getDriverIdFromOptions(c, riderId, driverOptionNumber)
 
-	if driverId == nil {
+	if !ok {
 		fmt.Println(INVALID_RIDE)
 		return
 	}
 
 	input := &pkg.StartRideInput{
-		RideId:   &rideId,
-		RiderId:  &riderId,
+		RideId:   rideId,
+		RiderId:  riderId,
 		DriverId: driverId,
 	}
 
@@ -63,7 +63,7 @@ func isKnownErrorForStartRide(err error) bool {
 		errors.Is(err, pkg.ErrRiderOnRide)
 }
 
-func getDriverIdFromOptions(c *context, riderId string, optionNumber int64) *string {
+func getDriverIdFromOptions(c *context, riderId string, optionNumber int64) (string, bool) {
 	driverOptions, err := c.getDriverOptionsForRider(riderId)
 	if err != nil {
 		if errors.Is(err, ErrDriverOptionsUnavailable) {
@@ -78,10 +78,10 @@ func getDriverIdFromOptions(c *context, riderId string, optionNumber int64) *str
 	}
 
 	if len(driverOptions) < int(optionNumber) {
-		return nil
+		return "", false
 	}
 
 	driverId := driverOptions[optionNumber-1]
 
-	return &driverId
+	return driverId, true
 }

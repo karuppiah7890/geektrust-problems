@@ -30,9 +30,9 @@ func TestStartRide(t *testing.T) {
 		driverId := "D3"
 
 		input := &pkg.StartRideInput{
-			RideId:   &rideId,
-			RiderId:  &riderId,
-			DriverId: &driverId,
+			RideId:   rideId,
+			RiderId:  riderId,
+			DriverId: driverId,
 		}
 
 		err := rideSharingApp.StartRide(input)
@@ -82,9 +82,9 @@ func TestStartRide(t *testing.T) {
 			driverId := "D3"
 
 			input := &pkg.StartRideInput{
-				RideId:   &rideId,
-				RiderId:  &riderId,
-				DriverId: &driverId,
+				RideId:   rideId,
+				RiderId:  riderId,
+				DriverId: driverId,
 			}
 
 			err := rideSharingApp.StartRide(input)
@@ -96,9 +96,9 @@ func TestStartRide(t *testing.T) {
 			anotherDriverId := "D1"
 
 			anotherStartRideInput := &pkg.StartRideInput{
-				RideId:   &rideId,
-				RiderId:  &anotherRiderId,
-				DriverId: &anotherDriverId,
+				RideId:   rideId,
+				RiderId:  anotherRiderId,
+				DriverId: anotherDriverId,
 			}
 
 			err = rideSharingApp.StartRide(anotherStartRideInput)
@@ -128,9 +128,9 @@ func TestStartRide(t *testing.T) {
 			driverId := "D4"
 
 			input := &pkg.StartRideInput{
-				RideId:   &rideId,
-				RiderId:  &riderId,
-				DriverId: &driverId,
+				RideId:   rideId,
+				RiderId:  riderId,
+				DriverId: driverId,
 			}
 
 			err := rideSharingApp.StartRide(input)
@@ -160,9 +160,9 @@ func TestStartRide(t *testing.T) {
 			driverId := "D3"
 
 			input := &pkg.StartRideInput{
-				RideId:   &rideId,
-				RiderId:  &riderId,
-				DriverId: &driverId,
+				RideId:   rideId,
+				RiderId:  riderId,
+				DriverId: driverId,
 			}
 
 			err := rideSharingApp.StartRide(input)
@@ -174,9 +174,9 @@ func TestStartRide(t *testing.T) {
 			anotherRiderId := "R2"
 
 			anotherStartRideInput := &pkg.StartRideInput{
-				RideId:   &anotherRideId,
-				RiderId:  &anotherRiderId,
-				DriverId: &driverId,
+				RideId:   anotherRideId,
+				RiderId:  anotherRiderId,
+				DriverId: driverId,
 			}
 
 			err = rideSharingApp.StartRide(anotherStartRideInput)
@@ -206,9 +206,9 @@ func TestStartRide(t *testing.T) {
 			driverId := "D3"
 
 			input := &pkg.StartRideInput{
-				RideId:   &rideId,
-				RiderId:  &riderId,
-				DriverId: &driverId,
+				RideId:   rideId,
+				RiderId:  riderId,
+				DriverId: driverId,
 			}
 
 			err := rideSharingApp.StartRide(input)
@@ -238,9 +238,9 @@ func TestStartRide(t *testing.T) {
 			driverId := "D3"
 
 			input := &pkg.StartRideInput{
-				RideId:   &rideId,
-				RiderId:  &riderId,
-				DriverId: &driverId,
+				RideId:   rideId,
+				RiderId:  riderId,
+				DriverId: driverId,
 			}
 
 			err := rideSharingApp.StartRide(input)
@@ -252,9 +252,9 @@ func TestStartRide(t *testing.T) {
 			anotherDriverId := "D1"
 
 			anotherStartRideInput := &pkg.StartRideInput{
-				RideId:   &anotherRideId,
-				RiderId:  &riderId,
-				DriverId: &anotherDriverId,
+				RideId:   anotherRideId,
+				RiderId:  riderId,
+				DriverId: anotherDriverId,
 			}
 
 			err = rideSharingApp.StartRide(anotherStartRideInput)

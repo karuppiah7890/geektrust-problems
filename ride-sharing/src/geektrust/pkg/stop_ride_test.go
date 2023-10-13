@@ -21,9 +21,9 @@ func TestStopRide(t *testing.T) {
 		driverId := "D3"
 
 		input := &pkg.StartRideInput{
-			RideId:   &rideId,
-			RiderId:  &riderId,
-			DriverId: &driverId,
+			RideId:   rideId,
+			RiderId:  riderId,
+			DriverId: driverId,
 		}
 
 		err := rideSharingApp.StartRide(input)
@@ -110,9 +110,9 @@ func TestStopRide(t *testing.T) {
 			driverId := "D3"
 
 			input := &pkg.StartRideInput{
-				RideId:   &rideId,
-				RiderId:  &riderId,
-				DriverId: &driverId,
+				RideId:   rideId,
+				RiderId:  riderId,
+				DriverId: driverId,
 			}
 
 			err := rideSharingApp.StartRide(input)

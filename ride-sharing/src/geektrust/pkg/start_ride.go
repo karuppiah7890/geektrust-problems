@@ -5,47 +5,51 @@ import (
 )
 
 type StartRideInput struct {
-	RiderId  *string
-	DriverId *string
-	RideId   *string
+	RiderId  string
+	DriverId string
+	RideId   string
 }
 
 func (r *RideSharingApp) StartRide(input *StartRideInput) error {
-	if _, ok := r.GetRide(*input.RideId); ok {
-		return fmt.Errorf("a ride with id %s already exists: %w", *input.RideId, ErrRideIdExist)
+	rideId := input.RideId
+	driverId := input.DriverId
+	riderId := input.RiderId
+
+	if _, ok := r.GetRide(rideId); ok {
+		return fmt.Errorf("a ride with id %s already exists: %w", rideId, ErrRideIdExist)
 	}
 
-	driver, ok := r.GetDriver(*input.DriverId)
+	driver, ok := r.GetDriver(driverId)
 	if !ok {
-		return fmt.Errorf("could not get driver with id %s: %w", *input.DriverId, ErrDriverIdNotExist)
+		return fmt.Errorf("could not get driver with id %s: %w", driverId, ErrDriverIdNotExist)
 	}
 
 	if driver == nil {
-		panic(fmt.Sprintf("expected driver details to exist for driver with id %s but none was found", *input.DriverId))
+		panic(fmt.Sprintf("expected driver details to exist for driver with id %s but none was found", driverId))
 	}
 
 	if !driver.isAvailableForRide {
-		return fmt.Errorf("driver with id %s is not available for a ride: %w", *input.DriverId, ErrDriverNotAvailable)
+		return fmt.Errorf("driver with id %s is not available for a ride: %w", driverId, ErrDriverNotAvailable)
 	}
 
-	rider, ok := r.GetRider(*input.RiderId)
+	rider, ok := r.GetRider(riderId)
 	if !ok {
-		return fmt.Errorf("could not get rider with id %s: %w", *input.RiderId, ErrRiderIdNotExist)
+		return fmt.Errorf("could not get rider with id %s: %w", riderId, ErrRiderIdNotExist)
 	}
 
 	if rider == nil {
-		panic(fmt.Sprintf("expected rider details to exist for rider with id %s but none was found", *input.RiderId))
+		panic(fmt.Sprintf("expected rider details to exist for rider with id %s but none was found", riderId))
 	}
 
 	if rider.isOnRide {
-		return fmt.Errorf("rider with id %s is already on a ride: %w", *input.RiderId, ErrRiderOnRide)
+		return fmt.Errorf("rider with id %s is already on a ride: %w", riderId, ErrRiderOnRide)
 	}
 
-	r.rides[*input.RideId] = &Ride{
-		id:         *input.RideId,
+	r.rides[rideId] = &Ride{
+		id:         rideId,
 		isComplete: false,
-		riderId:    *input.RiderId,
-		driverId:   *input.DriverId,
+		riderId:    riderId,
+		driverId:   driverId,
 	}
 
 	driver.isAvailableForRide = false
