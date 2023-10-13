@@ -295,6 +295,8 @@ based on the known information?
 ---
 
 TODO:
+- Check exported fields
+- Check exported types
 - move some of the functions and methods in `main` to something inside `cmd`. For example `context` can go into a package under `cmd` called `ctx`
 - move `driver`, `rider`, `ride` into packages of their own under `pkg`. It makes more sense
 - Too many `panic`s all over the code. Check if the usage is correct and if and where
