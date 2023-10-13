@@ -3,8 +3,6 @@ package pkg
 import (
 	"container/heap"
 	"fmt"
-	"geektrust/pkg/location"
-	"math"
 )
 
 type MatchRiderWithDriverInput struct {
@@ -36,7 +34,7 @@ func (r *RideSharingApp) MatchRiderWithDriver(input *MatchRiderWithDriverInput) 
 	// TODO: Get only available drivers and not all drivers. Available means - drivers
 	// who are not on a ride
 	for _, driver := range r.drivers {
-		distance := distanceBetween(rider.Location, driver.GetLocation())
+		distance := rider.Location.DistanceBetween(driver.GetLocation())
 		// if distance between them is less than radius in KM then insert it into matched drivers, or else leave it.
 		if distance <= input.RadiusInKm {
 			matchedDrivers = append(matchedDrivers, &MatchedDriver{
@@ -76,19 +74,6 @@ func min(x, y int) int {
 		return x
 	}
 	return y
-}
-
-func distanceBetween(location *location.Location, anotherLocation *location.Location) float64 {
-	// Euclidean distance formula: SquareRoot( (x2 - x1)^2 + (y2 - y1)^2 )
-	return squareRoot(square(anotherLocation.GetX()-location.GetX()) + square(anotherLocation.GetY()-location.GetY()))
-}
-
-func square(x float64) float64 {
-	return math.Pow(x, 2)
-}
-
-func squareRoot(x float64) float64 {
-	return math.Sqrt(x)
 }
 
 // Ensuring that MatchedDrivers implements heap.Interface

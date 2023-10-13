@@ -2,6 +2,7 @@ package location_test
 
 import (
 	"geektrust/pkg/location"
+	"math"
 	"testing"
 )
 
@@ -70,5 +71,17 @@ func TestLocation(t *testing.T) {
 				}
 			})
 		})
+	})
+
+	t.Run("Distance Between", func(t *testing.T) {
+		loc := location.New(1, 1)
+		anotherLoc := location.New(2, 2)
+
+		expected := math.Sqrt(2)
+		actual := loc.DistanceBetween(anotherLoc)
+
+		if expected != actual {
+			t.Errorf("actual distance and expected distance is different. actual: %v. expected: %v", actual, expected)
+		}
 	})
 }
