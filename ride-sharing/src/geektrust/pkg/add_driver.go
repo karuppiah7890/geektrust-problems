@@ -14,14 +14,12 @@ func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
 		return fmt.Errorf("a driver with id %s already exists", driverId)
 	}
 
-	r.drivers[driverId] = &Driver{
-		ID: driverId,
-		Location: &Location{
-			X: input.Location.X,
-			Y: input.Location.Y,
-		},
-		isAvailableForRide: true,
+	location := &Location{
+		X: input.Location.X,
+		Y: input.Location.Y,
 	}
+
+	r.drivers[driverId] = NewDriver(driverId, location, true)
 
 	return nil
 }

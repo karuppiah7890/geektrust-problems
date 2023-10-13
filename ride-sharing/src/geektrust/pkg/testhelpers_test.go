@@ -61,7 +61,7 @@ func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *pkg.Dri
 	}
 
 	input := &pkg.AddDriverInput{
-		DriverId: driver.ID,
+		DriverId: driver.GetID(),
 		Location: location,
 	}
 
@@ -95,13 +95,11 @@ func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *pkg.Rider
 }
 
 func driver(driverId string, x float64, y float64) *pkg.Driver {
-	return &pkg.Driver{
-		ID: driverId,
-		Location: &pkg.Location{
-			X: x,
-			Y: y,
-		},
+	location := &pkg.Location{
+		X: x,
+		Y: y,
 	}
+	return pkg.NewDriver(driverId, location, true)
 }
 
 func rider(riderId string, x float64, y float64) *pkg.Rider {

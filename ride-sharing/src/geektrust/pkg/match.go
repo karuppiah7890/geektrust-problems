@@ -64,7 +64,7 @@ func (r *RideSharingApp) MatchRiderWithDriver(input *MatchRiderWithDriverInput) 
 		if !ok {
 			panic(fmt.Sprintf("unexpected error occurred: not able to convert a value popped from matched drivers heap to a driver. value: %v", value))
 		}
-		idsOfMatchedDrivers = append(idsOfMatchedDrivers, d.ID)
+		idsOfMatchedDrivers = append(idsOfMatchedDrivers, d.GetID())
 	}
 
 	return idsOfMatchedDrivers, nil
@@ -102,7 +102,7 @@ func (m MatchedDrivers) Less(i, j int) bool {
 	anotherDriver := m[j]
 
 	if driver.distanceFromRider == anotherDriver.distanceFromRider {
-		return isLexicographicallyOrdered(driver.ID, anotherDriver.ID)
+		return isLexicographicallyOrdered(driver.GetID(), anotherDriver.GetID())
 	}
 
 	return driver.distanceFromRider < anotherDriver.distanceFromRider
