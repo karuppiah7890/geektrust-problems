@@ -61,7 +61,7 @@ func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *pkg.Dri
 	}
 
 	input := &pkg.AddDriverInput{
-		DriverId: &driver.ID,
+		DriverId: driver.ID,
 		Location: location,
 	}
 

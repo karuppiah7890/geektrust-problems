@@ -21,7 +21,7 @@ func addDriver(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandI
 	}
 
 	input := &pkg.AddDriverInput{
-		DriverId: &driverId,
+		DriverId: driverId,
 		Location: &location,
 	}
 

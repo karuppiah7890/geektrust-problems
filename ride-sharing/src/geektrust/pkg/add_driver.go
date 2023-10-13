@@ -3,17 +3,19 @@ package pkg
 import "fmt"
 
 type AddDriverInput struct {
-	DriverId *string
+	DriverId string
 	Location *Location
 }
 
 func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
-	if _, ok := r.drivers[*input.DriverId]; ok {
-		return fmt.Errorf("a driver with id %s already exists", *input.DriverId)
+	driverId := input.DriverId
+
+	if _, ok := r.drivers[driverId]; ok {
+		return fmt.Errorf("a driver with id %s already exists", driverId)
 	}
 
-	r.drivers[*input.DriverId] = &Driver{
-		ID: *input.DriverId,
+	r.drivers[driverId] = &Driver{
+		ID: driverId,
 		Location: &Location{
 			X: input.Location.X,
 			Y: input.Location.Y,
