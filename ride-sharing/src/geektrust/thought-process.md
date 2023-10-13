@@ -148,6 +148,9 @@ We will also store the ride ID in the driver and rider, in case they are on a ri
 will be empty. We can use a pointer to string and have `nil` for no ride and have a pointer to
 a string (ride id) for cases when they are on a ride
 
+Final: As of now, we are not storing ride details or any pointer to ride details in rider and
+driver. We store ride details separately and ride details has rider id and driver id as string
+
 - Matching rides - give all outputs at `pkg` level? All drivers within 5km distance,
 instead of just 5, and then cap it to 5 at `main` level? Hmm 🤔💭🤨🧐. We can start
 with this. Later we can customize it if needed and cap it at `pkg` level itself
