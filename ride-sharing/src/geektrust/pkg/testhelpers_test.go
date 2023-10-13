@@ -56,8 +56,8 @@ func addDrivers(t *testing.T, rideSharingApp *pkg.RideSharingApp, drivers []*pkg
 
 func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *pkg.Driver) {
 	location := &pkg.Location{
-		X: driver.Location.X,
-		Y: driver.Location.Y,
+		X: driver.GetLocation().X,
+		Y: driver.GetLocation().Y,
 	}
 
 	input := &pkg.AddDriverInput{

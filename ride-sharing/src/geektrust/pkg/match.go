@@ -35,7 +35,7 @@ func (r *RideSharingApp) MatchRiderWithDriver(input *MatchRiderWithDriverInput) 
 	// TODO: Get only available drivers and not all drivers. Available means - drivers
 	// who are not on a ride
 	for _, driver := range r.drivers {
-		distance := distanceBetween(rider.Location, driver.Location)
+		distance := distanceBetween(rider.Location, driver.GetLocation())
 		// if distance between them is less than radius in KM then insert it into matched drivers, or else leave it.
 		if distance <= input.RadiusInKm {
 			matchedDrivers = append(matchedDrivers, &MatchedDriver{

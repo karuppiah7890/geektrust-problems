@@ -2,16 +2,20 @@ package pkg
 
 type Driver struct {
 	id                 string
-	Location           *Location
+	location           *Location
 	isAvailableForRide bool
 }
 
 func NewDriver(id string, location *Location, isAvailableForRide bool) *Driver {
 	return &Driver{
 		id: id,
-		Location: location,
+		location: location,
 		isAvailableForRide: isAvailableForRide,
 	}
+}
+
+func (d *Driver) GetLocation() *Location {
+	return d.location
 }
 
 func (d *Driver) GetID() string {

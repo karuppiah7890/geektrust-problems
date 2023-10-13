@@ -31,7 +31,7 @@ func TestAddDriver(t *testing.T) {
 			t.Errorf("could not get driver with driver id %v", driverId)
 		}
 
-		assertLocationEqual(t, driver.Location, location)
+		assertLocationEqual(t, driver.GetLocation(), location)
 		assertStringEqual(t, driver.GetID(), driverId)
 	})
 
