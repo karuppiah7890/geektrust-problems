@@ -18,14 +18,11 @@ func addRider(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandIn
 	x := parseCoordinate(commandInput[1])
 	y := parseCoordinate(commandInput[2])
 
-	location := pkg.Location{
-		X: x,
-		Y: y,
-	}
+	location := pkg.NewLocation(x, y)
 
 	input := &pkg.AddRiderInput{
 		RiderId:  riderId,
-		Location: &location,
+		Location: location,
 	}
 
 	err := rideSharingApp.AddRider(input)

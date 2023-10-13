@@ -15,14 +15,11 @@ func addDriver(rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandI
 	x := parseCoordinate(commandInput[1])
 	y := parseCoordinate(commandInput[2])
 
-	location := pkg.Location{
-		X: x,
-		Y: y,
-	}
+	location := pkg.NewLocation(x, y)
 
 	input := &pkg.AddDriverInput{
 		DriverId: driverId,
-		Location: &location,
+		Location: location,
 	}
 
 	err := rideSharingApp.AddDriver(input)

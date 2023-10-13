@@ -79,7 +79,7 @@ func min(x, y int) int {
 
 func distanceBetween(location *Location, anotherLocation *Location) float64 {
 	// Euclidean distance formula: SquareRoot( (x2 - x1)^2 + (y2 - y1)^2 )
-	return squareRoot(square(anotherLocation.X-location.X) + square(anotherLocation.Y-location.Y))
+	return squareRoot(square(anotherLocation.GetX()-location.GetX()) + square(anotherLocation.GetY()-location.GetY()))
 }
 
 func square(x float64) float64 {

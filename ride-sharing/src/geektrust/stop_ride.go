@@ -26,10 +26,7 @@ func stopRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber in
 
 	input := &pkg.StopRideInput{
 		RideId: rideId,
-		Destination: &pkg.Location{
-			X: destinationX,
-			Y: destinationY,
-		},
+		Destination: pkg.NewLocation(destinationX, destinationY),
 		TimeTakenInMinutes: timeTakenInMinutes,
 	}
 

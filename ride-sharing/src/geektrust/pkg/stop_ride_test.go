@@ -33,10 +33,7 @@ func TestStopRide(t *testing.T) {
 
 		stopRideInput := &pkg.StopRideInput{
 			RideId: rideId,
-			Destination: &pkg.Location{
-				X: 4,
-				Y: 5,
-			},
+			Destination: pkg.NewLocation(4, 5),
 			TimeTakenInMinutes: 32,
 		}
 
@@ -78,10 +75,7 @@ func TestStopRide(t *testing.T) {
 
 			input := &pkg.StopRideInput{
 				RideId: rideId,
-				Destination: &pkg.Location{
-					X: 40,
-					Y: 50,
-				},
+				Destination: pkg.NewLocation(40, 50),
 				TimeTakenInMinutes: 25,
 			}
 
@@ -122,10 +116,7 @@ func TestStopRide(t *testing.T) {
 
 			stopRideInput := &pkg.StopRideInput{
 				RideId: rideId,
-				Destination: &pkg.Location{
-					X: 4,
-					Y: 5,
-				},
+				Destination: pkg.NewLocation(4, 5),
 				TimeTakenInMinutes: 32,
 			}
 

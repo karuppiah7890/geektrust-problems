@@ -11,10 +11,7 @@ func TestAddDriver(t *testing.T) {
 
 		driverId := "D1"
 
-		location := &pkg.Location{
-			X: 1,
-			Y: 1,
-		}
+		location := pkg.NewLocation(1, 1)
 
 		input := &pkg.AddDriverInput{
 			DriverId: driverId,
@@ -40,10 +37,7 @@ func TestAddDriver(t *testing.T) {
 
 		driverId := "D1"
 
-		location := &pkg.Location{
-			X: 1,
-			Y: 1,
-		}
+		location := pkg.NewLocation(1, 1)
 
 		input := &pkg.AddDriverInput{
 			DriverId: driverId,

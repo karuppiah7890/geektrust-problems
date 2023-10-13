@@ -6,8 +6,8 @@ import (
 )
 
 func assertLocationEqual(t *testing.T, actual *pkg.Location, expected *pkg.Location) bool {
-	if actual.X != expected.X || actual.Y != expected.Y {
-		t.Errorf("expected the locations to be equal but they were not. Actual: (%v, %v). Expected: (%v, %v)", actual.X, actual.Y, expected.X, expected.Y)
+	if !actual.Equals(expected) {
+		t.Errorf("expected the locations to be equal but they were not. Actual: (%v, %v). Expected: (%v, %v)", actual.GetX(), actual.GetY(), expected.GetX(), expected.GetY())
 		return false
 	}
 
@@ -55,14 +55,9 @@ func addDrivers(t *testing.T, rideSharingApp *pkg.RideSharingApp, drivers []*pkg
 }
 
 func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *pkg.Driver) {
-	location := &pkg.Location{
-		X: driver.GetLocation().X,
-		Y: driver.GetLocation().Y,
-	}
-
 	input := &pkg.AddDriverInput{
 		DriverId: driver.GetID(),
-		Location: location,
+		Location: driver.GetLocation().Clone(),
 	}
 
 	err := rideSharingApp.AddDriver(input)
@@ -78,14 +73,9 @@ func addRiders(t *testing.T, rideSharingApp *pkg.RideSharingApp, riders []*pkg.R
 }
 
 func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *pkg.Rider) {
-	location := &pkg.Location{
-		X: rider.Location.X,
-		Y: rider.Location.Y,
-	}
-
 	input := &pkg.AddRiderInput{
 		RiderId:  rider.ID,
-		Location: location,
+		Location: rider.Location.Clone(),
 	}
 
 	err := rideSharingApp.AddRider(input)
@@ -95,19 +85,13 @@ func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *pkg.Rider
 }
 
 func driver(driverId string, x float64, y float64) *pkg.Driver {
-	location := &pkg.Location{
-		X: x,
-		Y: y,
-	}
+	location := pkg.NewLocation(x, y)
 	return pkg.NewDriver(driverId, location, true)
 }
 
 func rider(riderId string, x float64, y float64) *pkg.Rider {
 	return &pkg.Rider{
-		ID: riderId,
-		Location: &pkg.Location{
-			X: x,
-			Y: y,
-		},
+		ID:       riderId,
+		Location: pkg.NewLocation(x, y),
 	}
 }

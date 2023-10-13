@@ -15,11 +15,8 @@ func (r *RideSharingApp) AddRider(input *AddRiderInput) error {
 	}
 
 	r.riders[riderId] = &Rider{
-		ID: riderId,
-		Location: &Location{
-			X: input.Location.X,
-			Y: input.Location.Y,
-		},
+		ID:       riderId,
+		Location: input.Location.Clone(),
 	}
 
 	return nil
