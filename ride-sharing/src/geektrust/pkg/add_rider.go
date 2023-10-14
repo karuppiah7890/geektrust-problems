@@ -17,10 +17,7 @@ func (r *RideSharingApp) AddRider(input *AddRiderInput) error {
 		return fmt.Errorf("a rider with id %s already exists", riderId)
 	}
 
-	r.riders[riderId] = &Rider{
-		ID:       riderId,
-		Location: input.Location.Clone(),
-	}
+	r.riders[riderId] = NewRider(riderId, input.Location.Clone(), false)
 
 	return nil
 }

@@ -7,7 +7,7 @@ type Ride struct {
 	driverId   string
 }
 
-func NewRide(id string, isComplete bool, riderId string, driverId string) *Ride {
+func New(id string, isComplete bool, riderId string, driverId string) *Ride {
 	return &Ride{
 		id:         id,
 		isComplete: isComplete,

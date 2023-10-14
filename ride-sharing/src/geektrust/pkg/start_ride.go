@@ -42,14 +42,14 @@ func (r *RideSharingApp) StartRide(input *StartRideInput) error {
 		panic(fmt.Sprintf("expected rider details to exist for rider with id %s but none was found", riderId))
 	}
 
-	if rider.isOnRide {
+	if rider.IsOnRide() {
 		return fmt.Errorf("rider with id %s is already on a ride: %w", riderId, ErrRiderOnRide)
 	}
 
-	r.rides[rideId] = ride.NewRide(rideId, false, riderId, driverId)
+	r.rides[rideId] = ride.New(rideId, false, riderId, driverId)
 
 	driver.MarkAsUnavailableForRide()
-	rider.isOnRide = true
+	rider.GetOnRide()
 
 	return nil
 }

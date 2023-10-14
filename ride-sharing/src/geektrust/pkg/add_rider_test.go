@@ -29,8 +29,8 @@ func TestAddRider(t *testing.T) {
 			t.Errorf("expected to get rider for rider id %v but got none", riderId)
 		}
 
-		assertLocationEqual(t, rider.Location, loc)
-		assertStringEqual(t, rider.ID, riderId)
+		assertLocationEqual(t, rider.GetLocation(), loc)
+		assertStringEqual(t, rider.GetID(), riderId)
 	})
 
 	t.Run("fail when adding a rider with rider id that already exists", func(t *testing.T) {

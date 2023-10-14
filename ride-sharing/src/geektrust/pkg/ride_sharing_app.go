@@ -5,6 +5,8 @@ import (
 	"geektrust/pkg/ride"
 )
 
+// TODO: move RideSharingApp into it's own package called
+// ride_sharing_app or ridesharingapp
 type RideSharingApp struct {
 	drivers map[string]*driver.Driver
 	riders  map[string]*Rider
