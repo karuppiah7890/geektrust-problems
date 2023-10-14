@@ -3,6 +3,7 @@ package pkg
 import (
 	"container/heap"
 	"fmt"
+	"geektrust/pkg/driver"
 )
 
 type MatchRiderWithDriverInput struct {
@@ -12,7 +13,7 @@ type MatchRiderWithDriverInput struct {
 }
 
 type MatchedDriver struct {
-	*Driver
+	*driver.Driver
 	distanceFromRider float64
 }
 

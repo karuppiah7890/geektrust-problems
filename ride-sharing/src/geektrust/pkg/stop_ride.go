@@ -38,13 +38,13 @@ func (r *RideSharingApp) StopRide(input *StopRideInput) error {
 
 	// What about a weird case where driver is already available?
 	// This could happen due to some glitch in the system
-	if driver.isAvailableForRide {
+	if driver.IsAvailableForRide() {
 		// TODO: Should we just return an error here? or panic due to system error?
 		panic(fmt.Sprintf("expected driver with id %s to not be available for a ride but they were already available for a ride", ride.GetDriverId()))
 	}
 
 	// make driver available for ride
-	driver.isAvailableForRide = true
+	driver.MarkAsAvailableForRide()
 
 	rider, ok := r.GetRider(ride.GetRiderId())
 	if !ok {

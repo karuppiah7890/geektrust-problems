@@ -2,11 +2,13 @@ package pkg_test
 
 import (
 	"geektrust/pkg"
+	"geektrust/pkg/driver"
+
 	"testing"
 )
 
 type TestCase struct {
-	drivers        []*pkg.Driver
+	drivers        []*driver.Driver
 	riders         []*pkg.Rider
 	matchTestCases []MatchTestCase
 }
@@ -24,14 +26,13 @@ func TestMatchRiderWithDriver(t *testing.T) {
 	t.Run("when all drivers are available for matching with riders", func(t *testing.T) {
 		testCases := TestCases{
 			{
-				drivers: []*pkg.Driver{
-					driver("D4", 2, 2),
-					driver("D1", 1, 1),
-					driver("D2", 4, 5),
-					driver("D3", 2, 2),
+				drivers: []*driver.Driver{newDriver("D4", 2, 2),
+					newDriver("D1", 1, 1),
+					newDriver("D2", 4, 5),
+					newDriver("D3", 2, 2),
 				},
 				riders: []*pkg.Rider{
-					rider("R1", 0, 0),
+					newRider("R1", 0, 0),
 				},
 				matchTestCases: []MatchTestCase{
 					{
@@ -43,15 +44,15 @@ func TestMatchRiderWithDriver(t *testing.T) {
 				},
 			},
 			{
-				drivers: []*pkg.Driver{
-					driver("D1", 0, 1),
-					driver("D4", 2, 3),
-					driver("D2", 2, 3),
-					driver("D3", 4, 2),
+				drivers: []*driver.Driver{
+					newDriver("D1", 0, 1),
+					newDriver("D4", 2, 3),
+					newDriver("D2", 2, 3),
+					newDriver("D3", 4, 2),
 				},
 				riders: []*pkg.Rider{
-					rider("R1", 3, 5),
-					rider("R2", 1, 1),
+					newRider("R1", 3, 5),
+					newRider("R2", 1, 1),
 				},
 				matchTestCases: []MatchTestCase{
 					{

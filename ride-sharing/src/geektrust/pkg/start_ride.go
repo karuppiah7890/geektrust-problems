@@ -29,7 +29,7 @@ func (r *RideSharingApp) StartRide(input *StartRideInput) error {
 		panic(fmt.Sprintf("expected driver details to exist for driver with id %s but none was found", driverId))
 	}
 
-	if !driver.isAvailableForRide {
+	if !driver.IsAvailableForRide() {
 		return fmt.Errorf("driver with id %s is not available for a ride: %w", driverId, ErrDriverNotAvailable)
 	}
 
@@ -48,7 +48,7 @@ func (r *RideSharingApp) StartRide(input *StartRideInput) error {
 
 	r.rides[rideId] = ride.NewRide(rideId, false, riderId, driverId)
 
-	driver.isAvailableForRide = false
+	driver.MarkAsUnavailableForRide()
 	rider.isOnRide = true
 
 	return nil

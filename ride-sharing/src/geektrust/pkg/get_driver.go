@@ -1,7 +1,9 @@
 package pkg
 
-func (r *RideSharingApp) GetDriver(driverId string) (*Driver, bool) {
-	driver, ok := r.drivers[driverId]
+import "geektrust/pkg/driver"
 
-	return driver, ok
+func (r *RideSharingApp) GetDriver(driverId string) (*driver.Driver, bool) {
+	d, ok := r.drivers[driverId]
+
+	return d, ok
 }

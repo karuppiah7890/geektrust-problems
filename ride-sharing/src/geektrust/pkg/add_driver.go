@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+	"geektrust/pkg/driver"
 	"geektrust/pkg/location"
 )
 
@@ -19,7 +20,7 @@ func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
 
 	loc := input.Location.Clone()
 
-	r.drivers[driverId] = NewDriver(driverId, loc, true)
+	r.drivers[driverId] = driver.New(driverId, loc, true)
 
 	return nil
 }

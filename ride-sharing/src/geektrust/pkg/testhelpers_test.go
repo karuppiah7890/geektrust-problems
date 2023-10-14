@@ -2,6 +2,7 @@ package pkg_test
 
 import (
 	"geektrust/pkg"
+	"geektrust/pkg/driver"
 	"geektrust/pkg/location"
 	"testing"
 )
@@ -49,13 +50,13 @@ func assertStringArrayEqual(t *testing.T, actual []string, expected []string) bo
 	return true
 }
 
-func addDrivers(t *testing.T, rideSharingApp *pkg.RideSharingApp, drivers []*pkg.Driver) {
+func addDrivers(t *testing.T, rideSharingApp *pkg.RideSharingApp, drivers []*driver.Driver) {
 	for _, driver := range drivers {
 		addDriver(t, rideSharingApp, driver)
 	}
 }
 
-func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *pkg.Driver) {
+func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *driver.Driver) {
 	input := &pkg.AddDriverInput{
 		DriverId: driver.GetID(),
 		Location: driver.GetLocation().Clone(),
@@ -85,12 +86,12 @@ func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *pkg.Rider
 	}
 }
 
-func driver(driverId string, x float64, y float64) *pkg.Driver {
+func newDriver(driverId string, x float64, y float64) *driver.Driver {
 	loc := location.New(x, y)
-	return pkg.NewDriver(driverId, loc, true)
+	return driver.New(driverId, loc, true)
 }
 
-func rider(riderId string, x float64, y float64) *pkg.Rider {
+func newRider(riderId string, x float64, y float64) *pkg.Rider {
 	return &pkg.Rider{
 		ID:       riderId,
 		Location: location.New(x, y),

@@ -3,6 +3,7 @@ package pkg_test
 import (
 	"errors"
 	"geektrust/pkg"
+	"geektrust/pkg/driver"
 	"testing"
 )
 
@@ -18,12 +19,12 @@ import (
 func TestStartRide(t *testing.T) {
 	t.Run("start a valid ride", func(t *testing.T) {
 		rideSharingApp := pkg.NewRideSharingApp()
-		addDrivers(t, rideSharingApp, []*pkg.Driver{
-			driver("D1", 1, 1),
-			driver("D2", 4, 5),
-			driver("D3", 2, 2),
+		addDrivers(t, rideSharingApp, []*driver.Driver{
+			newDriver("D1", 1, 1),
+			newDriver("D2", 4, 5),
+			newDriver("D3", 2, 2),
 		})
-		addRiders(t, rideSharingApp, []*pkg.Rider{rider("R1", 0, 0)})
+		addRiders(t, rideSharingApp, []*pkg.Rider{newRider("R1", 0, 0)})
 
 		rideId := "RIDE-001"
 		riderId := "R1"
@@ -66,14 +67,14 @@ func TestStartRide(t *testing.T) {
 	t.Run("invalid ride cases", func(t *testing.T) {
 		t.Run("ride id already exists", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
-			addDrivers(t, rideSharingApp, []*pkg.Driver{
-				driver("D1", 1, 1),
-				driver("D2", 4, 5),
-				driver("D3", 2, 2),
+			addDrivers(t, rideSharingApp, []*driver.Driver{
+				newDriver("D1", 1, 1),
+				newDriver("D2", 4, 5),
+				newDriver("D3", 2, 2),
 			})
 			addRiders(t, rideSharingApp, []*pkg.Rider{
-				rider("R1", 0, 0),
-				rider("R2", 0, 0),
+				newRider("R1", 0, 0),
+				newRider("R2", 0, 0),
 			})
 
 			rideId := "RIDE-001"
@@ -112,14 +113,14 @@ func TestStartRide(t *testing.T) {
 
 		t.Run("driver id does not exist", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
-			addDrivers(t, rideSharingApp, []*pkg.Driver{
-				driver("D1", 1, 1),
-				driver("D2", 4, 5),
-				driver("D3", 2, 2),
+			addDrivers(t, rideSharingApp, []*driver.Driver{
+				newDriver("D1", 1, 1),
+				newDriver("D2", 4, 5),
+				newDriver("D3", 2, 2),
 			})
 			addRiders(t, rideSharingApp, []*pkg.Rider{
-				rider("R1", 0, 0),
-				rider("R2", 0, 0),
+				newRider("R1", 0, 0),
+				newRider("R2", 0, 0),
 			})
 
 			rideId := "RIDE-001"
@@ -144,14 +145,14 @@ func TestStartRide(t *testing.T) {
 
 		t.Run("driver is not available", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
-			addDrivers(t, rideSharingApp, []*pkg.Driver{
-				driver("D1", 1, 1),
-				driver("D2", 4, 5),
-				driver("D3", 2, 2),
+			addDrivers(t, rideSharingApp, []*driver.Driver{
+				newDriver("D1", 1, 1),
+				newDriver("D2", 4, 5),
+				newDriver("D3", 2, 2),
 			})
 			addRiders(t, rideSharingApp, []*pkg.Rider{
-				rider("R1", 0, 0),
-				rider("R2", 0, 0),
+				newRider("R1", 0, 0),
+				newRider("R2", 0, 0),
 			})
 
 			rideId := "RIDE-001"
@@ -190,14 +191,14 @@ func TestStartRide(t *testing.T) {
 
 		t.Run("rider id does not exist", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
-			addDrivers(t, rideSharingApp, []*pkg.Driver{
-				driver("D1", 1, 1),
-				driver("D2", 4, 5),
-				driver("D3", 2, 2),
+			addDrivers(t, rideSharingApp, []*driver.Driver{
+				newDriver("D1", 1, 1),
+				newDriver("D2", 4, 5),
+				newDriver("D3", 2, 2),
 			})
 			addRiders(t, rideSharingApp, []*pkg.Rider{
-				rider("R1", 0, 0),
-				rider("R2", 0, 0),
+				newRider("R1", 0, 0),
+				newRider("R2", 0, 0),
 			})
 
 			rideId := "RIDE-001"
@@ -222,14 +223,14 @@ func TestStartRide(t *testing.T) {
 
 		t.Run("rider is already on ride", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
-			addDrivers(t, rideSharingApp, []*pkg.Driver{
-				driver("D1", 1, 1),
-				driver("D2", 4, 5),
-				driver("D3", 2, 2),
+			addDrivers(t, rideSharingApp, []*driver.Driver{
+				newDriver("D1", 1, 1),
+				newDriver("D2", 4, 5),
+				newDriver("D3", 2, 2),
 			})
 			addRiders(t, rideSharingApp, []*pkg.Rider{
-				rider("R1", 0, 0),
-				rider("R2", 0, 0),
+				newRider("R1", 0, 0),
+				newRider("R2", 0, 0),
 			})
 
 			rideId := "RIDE-001"

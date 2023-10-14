@@ -17,6 +17,7 @@ func NewRide(id string, isComplete bool, riderId string, driverId string) *Ride 
 }
 
 // TODO: This is a setter. See if we can get rid of this setter
+// and set this value as part of a "start ride" process / method
 func (r *Ride) Complete() {
 	r.isComplete = true
 }

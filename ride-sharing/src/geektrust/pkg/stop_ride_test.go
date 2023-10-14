@@ -3,6 +3,7 @@ package pkg_test
 import (
 	"errors"
 	"geektrust/pkg"
+	"geektrust/pkg/driver"
 	"geektrust/pkg/location"
 	"testing"
 )
@@ -10,12 +11,12 @@ import (
 func TestStopRide(t *testing.T) {
 	t.Run("stop a valid ride", func(t *testing.T) {
 		rideSharingApp := pkg.NewRideSharingApp()
-		addDrivers(t, rideSharingApp, []*pkg.Driver{
-			driver("D1", 1, 1),
-			driver("D2", 4, 5),
-			driver("D3", 2, 2),
+		addDrivers(t, rideSharingApp, []*driver.Driver{
+			newDriver("D1", 1, 1),
+			newDriver("D2", 4, 5),
+			newDriver("D3", 2, 2),
 		})
-		addRiders(t, rideSharingApp, []*pkg.Rider{rider("R1", 0, 0)})
+		addRiders(t, rideSharingApp, []*pkg.Rider{newRider("R1", 0, 0)})
 
 		rideId := "RIDE-001"
 		riderId := "R1"
@@ -93,12 +94,12 @@ func TestStopRide(t *testing.T) {
 
 		t.Run("ride has already been stopped", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
-			addDrivers(t, rideSharingApp, []*pkg.Driver{
-				driver("D1", 1, 1),
-				driver("D2", 4, 5),
-				driver("D3", 2, 2),
+			addDrivers(t, rideSharingApp, []*driver.Driver{
+				newDriver("D1", 1, 1),
+				newDriver("D2", 4, 5),
+				newDriver("D3", 2, 2),
 			})
-			addRiders(t, rideSharingApp, []*pkg.Rider{rider("R1", 0, 0)})
+			addRiders(t, rideSharingApp, []*pkg.Rider{newRider("R1", 0, 0)})
 
 			rideId := "RIDE-001"
 			riderId := "R1"
