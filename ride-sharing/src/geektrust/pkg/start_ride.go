@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+	"geektrust/pkg/ride"
 )
 
 type StartRideInput struct {
@@ -45,12 +46,7 @@ func (r *RideSharingApp) StartRide(input *StartRideInput) error {
 		return fmt.Errorf("rider with id %s is already on a ride: %w", riderId, ErrRiderOnRide)
 	}
 
-	r.rides[rideId] = &Ride{
-		id:         rideId,
-		isComplete: false,
-		riderId:    riderId,
-		driverId:   driverId,
-	}
+	r.rides[rideId] = ride.NewRide(rideId, false, riderId, driverId)
 
 	driver.isAvailableForRide = false
 	rider.isOnRide = true

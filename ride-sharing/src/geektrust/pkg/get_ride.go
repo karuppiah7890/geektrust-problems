@@ -1,6 +1,8 @@
 package pkg
 
-func (r *RideSharingApp) GetRide(rideId string) (*Ride, bool) {
-	ride, ok := r.rides[rideId]
-	return ride, ok
+import "geektrust/pkg/ride"
+
+func (app *RideSharingApp) GetRide(rideId string) (*ride.Ride, bool) {
+	r, ok := app.rides[rideId]
+	return r, ok
 }

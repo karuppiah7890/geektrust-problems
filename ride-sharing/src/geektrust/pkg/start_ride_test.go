@@ -34,7 +34,6 @@ func TestStartRide(t *testing.T) {
 			RiderId:  riderId,
 			DriverId: driverId,
 		}
-
 		err := rideSharingApp.StartRide(input)
 		if err != nil {
 			t.Errorf("expected no error occur while starting ride with given ride id, rider and driver but got error: %v", err)
