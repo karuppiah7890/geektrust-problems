@@ -22,13 +22,6 @@ func (loc *Location) GetY() float64 {
 	return loc.y
 }
 
-func (loc *Location) Clone() *Location {
-	return &Location{
-		x: loc.x,
-		y: loc.y,
-	}
-}
-
 func (loc *Location) Equals(anotherLoc *Location) bool {
 	return loc.x == anotherLoc.x && loc.y == anotherLoc.y
 }

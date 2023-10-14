@@ -60,7 +60,7 @@ func addDrivers(t *testing.T, rideSharingApp *pkg.RideSharingApp, drivers []*dri
 func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *driver.Driver) {
 	input := &pkg.AddDriverInput{
 		DriverId: driver.GetID(),
-		Location: driver.GetLocation().Clone(),
+		Location: driver.GetLocation(),
 	}
 
 	err := rideSharingApp.AddDriver(input)
@@ -78,7 +78,7 @@ func addRiders(t *testing.T, rideSharingApp *pkg.RideSharingApp, riders []*rider
 func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *rider.Rider) {
 	input := &pkg.AddRiderInput{
 		RiderId:  rider.GetID(),
-		Location: rider.GetLocation().Clone(),
+		Location: rider.GetLocation(),
 	}
 
 	err := rideSharingApp.AddRider(input)

@@ -18,7 +18,7 @@ func (r *RideSharingApp) AddDriver(input *AddDriverInput) error {
 		return fmt.Errorf("a driver with id %s already exists", driverId)
 	}
 
-	loc := input.Location.Clone()
+	loc := input.Location
 
 	r.drivers[driverId] = driver.New(driverId, loc, true)
 

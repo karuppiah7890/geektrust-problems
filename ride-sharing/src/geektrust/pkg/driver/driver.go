@@ -8,10 +8,10 @@ type Driver struct {
 	isAvailableForRide bool
 }
 
-func New(id string, location *location.Location, isAvailableForRide bool) *Driver {
+func New(id string, loc *location.Location, isAvailableForRide bool) *Driver {
 	return &Driver{
 		id:                 id,
-		location:           location,
+		location:           loc,
 		isAvailableForRide: isAvailableForRide,
 	}
 }

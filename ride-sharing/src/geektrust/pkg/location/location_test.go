@@ -22,23 +22,6 @@ func TestLocation(t *testing.T) {
 		}
 	})
 
-	t.Run("Clone", func(t *testing.T) {
-		loc := location.New(1, 2)
-		clonedLocation := loc.Clone()
-
-		if loc.GetX() != clonedLocation.GetX() {
-			t.Errorf("expected x coordinates to be equal but they were not. actual: %v. expected: %v", loc.GetX(), clonedLocation.GetX())
-		}
-
-		if loc.GetY() != clonedLocation.GetY() {
-			t.Errorf("expected y coordinates to be equal but they were not. actual: %v. expected: %v", loc.GetY(), clonedLocation.GetY())
-		}
-
-		if loc == clonedLocation {
-			t.Errorf("expected cloned location to have different pointer address but got the same address")
-		}
-	})
-
 	t.Run("Equals", func(t *testing.T) {
 		t.Run("Both are equal", func(t *testing.T) {
 			x := float64(1)
