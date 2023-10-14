@@ -36,6 +36,7 @@ func (r *Rider) GetOnRide() {
 
 // TODO: This is a setter. See if we can get rid of this setter
 // and set this value as part of a "stop ride" process / method
-func (r *Rider) GetOffRide() {
+func (r *Rider) GetOffRide(destination *location.Location) {
 	r.isOnRide = false
+	r.location = destination
 }

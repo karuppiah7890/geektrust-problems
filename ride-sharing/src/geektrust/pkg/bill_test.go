@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestStopRide(t *testing.T) {
+func TestCalculateBill(t *testing.T) {
 	t.Run("stop a valid ride", func(t *testing.T) {
 		rideSharingApp := pkg.NewRideSharingApp()
 		addDrivers(t, rideSharingApp, []*driver.Driver{
@@ -48,58 +48,44 @@ func TestStopRide(t *testing.T) {
 			t.Errorf("expected no error occur while stopping ride with given ride id (%v) but got error: %v", rideId, err)
 		}
 
-		ride, ok := rideSharingApp.GetRide(rideId)
-		if !ok {
-			t.Errorf("expected to get ride with given ride id %v, but got none", rideId)
+		calculateBillInput := &pkg.CalculateBillInput{
+			RideId: rideId,
 		}
 
-		assertStringEqual(t, ride.GetId(), rideId)
-		assertStringEqual(t, ride.GetRiderId(), riderId)
-		assertStringEqual(t, ride.GetDriverId(), driverId)
-		assertBoolEqual(t, ride.IsComplete(), true)
-		assertLocationEqual(t, ride.GetDestination(), destination)
-		assertIntEqual(t, ride.GetRideDurationInMinutes(), rideDurationInMinutes)
-
-		driver, ok := rideSharingApp.GetDriver(driverId)
-		if !ok {
-			t.Errorf("expected to get driver with id %s but got none", driverId)
+		bill, err := rideSharingApp.CalculateBill(calculateBillInput)
+		if err != nil {
+			t.Errorf("expected no error occur while calculating the bill for ride with given ride id (%v) but got error: %v", rideId, err)
 		}
 
-		assertBoolEqual(t, driver.IsAvailableForRide(), true)
-
-		rider, ok := rideSharingApp.GetRider(riderId)
-		if !ok {
-			t.Errorf("expected to get rider with id %s but got none", riderId)
-		}
-
-		assertBoolEqual(t, rider.IsOnRide(), false)
-		assertLocationEqual(t, rider.GetLocation(), destination)
+		assertFloatEqual(t, bill.Amount, 186.74)
+		assertStringEqual(t, bill.DriverId, driverId)
 	})
-
-	t.Run("invalid ride cases", func(t *testing.T) {
+	t.Run("failure cases", func(t *testing.T) {
 		t.Run("ride id does not exist", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
 
 			rideId := "RIDE-999"
 
-			input := &pkg.StopRideInput{
-				RideId:             rideId,
-				Destination:        location.New(40, 50),
-				TimeTakenInMinutes: 25,
+			input := &pkg.CalculateBillInput{
+				RideId: rideId,
 			}
 
-			err := rideSharingApp.StopRide(input)
+			bill, err := rideSharingApp.CalculateBill(input)
 
 			if err == nil {
-				t.Errorf("expected error to occur while stopping a ride with a ride id %v that does not exist, but got none", rideId)
+				t.Errorf("expected error to occur while calculating the bill of a ride with ride id %v that does not exist, but got none", rideId)
 			}
 
 			if !errors.Is(err, pkg.ErrRideIdNotExist) {
 				t.Errorf("expected the error to be something but got something else. Actual: %v. Expected: %v", err, pkg.ErrRideIdNotExist)
 			}
+
+			if bill != nil {
+				t.Errorf("expected no bill for an invalid ride with ride id that does not exist, but got bill: %v", bill)
+			}
 		})
 
-		t.Run("ride has already been stopped", func(t *testing.T) {
+		t.Run("ride is not completed", func(t *testing.T) {
 			rideSharingApp := pkg.NewRideSharingApp()
 			addDrivers(t, rideSharingApp, []*driver.Driver{
 				newDriver("D1", 1, 1),
@@ -123,25 +109,24 @@ func TestStopRide(t *testing.T) {
 				t.Errorf("expected no error occur while starting ride with given ride id, rider and driver but got error: %v", err)
 			}
 
-			stopRideInput := &pkg.StopRideInput{
-				RideId:             rideId,
-				Destination:        location.New(4, 5),
-				TimeTakenInMinutes: 32,
+			calculateBillInput := &pkg.CalculateBillInput{
+				RideId: rideId,
 			}
 
-			err = rideSharingApp.StopRide(stopRideInput)
-			if err != nil {
-				t.Errorf("expected no error occur while stopping ride with given ride id (%v) but got error: %v", rideId, err)
-			}
+			bill, err := rideSharingApp.CalculateBill(calculateBillInput)
 
-			err = rideSharingApp.StopRide(stopRideInput)
 			if err == nil {
-				t.Errorf("expected error to occur while stopping ride with id (%v) as the ride has already been stopped but got no error", rideId)
+				t.Errorf("expected error to occur while calculating the bill of a ride with ride id %v that hasn't been completed, but got none", rideId)
 			}
 
-			if !errors.Is(err, pkg.ErrRideStopped) {
-				t.Errorf("expected the error to be something but got something else. Actual: %v. Expected: %v", err, pkg.ErrRideStopped)
+			if !errors.Is(err, pkg.ErrRideNotCompleted) {
+				t.Errorf("expected the error to be something but got something else. Actual: %v. Expected: %v", err, pkg.ErrRideNotCompleted)
+			}
+
+			if bill != nil {
+				t.Errorf("expected no bill for a ride with ride id %v that hasn't been completed, but got bill: %v", rideId, bill)
 			}
 		})
+
 	})
 }

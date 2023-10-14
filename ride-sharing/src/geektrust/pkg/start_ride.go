@@ -46,7 +46,7 @@ func (r *RideSharingApp) StartRide(input *StartRideInput) error {
 		return fmt.Errorf("rider with id %s is already on a ride: %w", riderId, ErrRiderOnRide)
 	}
 
-	r.rides[rideId] = ride.New(rideId, false, riderId, driverId)
+	r.rides[rideId] = ride.New(rideId, riderId, driverId, rider.GetLocation())
 
 	driver.MarkAsUnavailableForRide()
 	rider.GetOnRide()

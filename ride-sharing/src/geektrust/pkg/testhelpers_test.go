@@ -35,6 +35,37 @@ func assertBoolEqual(t *testing.T, actual bool, expected bool) bool {
 	return true
 }
 
+// Two floats are equal if their integer parts are equal and if their decimal points are close to each other
+func assertFloatEqual(t *testing.T, actual float64, expected float64) bool {
+	if actual == expected {
+		return true
+	}
+
+	if int(actual) != int(expected) {
+		t.Errorf("expected the integer parts of the floating point numbers to be equal but they were not. Actual: %v. Expected: %v", actual, expected)
+		return false
+	}
+
+	actualDecimal := actual - float64(int(actual))
+	expectedDecimal := expected - float64(int(expected))
+
+	if (actualDecimal < 0.5 && expectedDecimal > 0.5) || (actualDecimal > 0.5 && expectedDecimal < 0.5) {
+		t.Errorf("expected the decimal parts of the floating point numbers to be close to each other but they were not. Actual: %v. Expected: %v", actualDecimal, expectedDecimal)
+		return false
+	}
+
+	return true
+}
+
+func assertIntEqual(t *testing.T, actual int, expected int) bool {
+	if actual != expected {
+		t.Errorf("expected the integers to be equal but they were not. Actual: %v. Expected: %v", actual, expected)
+		return false
+	}
+
+	return true
+}
+
 func assertStringArrayEqual(t *testing.T, actual []string, expected []string) bool {
 	if len(actual) != len(expected) {
 		t.Errorf("expcted the length of the string arrays to be equal but they were not. Actual: %v. Expected: %v", len(actual), len(expected))

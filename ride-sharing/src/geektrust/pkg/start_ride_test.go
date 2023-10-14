@@ -64,6 +64,7 @@ func TestStartRide(t *testing.T) {
 		}
 
 		assertBoolEqual(t, rider.IsOnRide(), true)
+		assertLocationEqual(t, ride.GetSource(), rider.GetLocation())
 	})
 	t.Run("invalid ride cases", func(t *testing.T) {
 		t.Run("ride id already exists", func(t *testing.T) {

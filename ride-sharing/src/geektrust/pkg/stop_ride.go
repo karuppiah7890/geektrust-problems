@@ -24,7 +24,7 @@ func (r *RideSharingApp) StopRide(input *StopRideInput) error {
 	}
 
 	// complete the ride
-	ride.Complete()
+	ride.Complete(input.Destination, input.TimeTakenInMinutes)
 
 	driver, ok := r.GetDriver(ride.GetDriverId())
 	if !ok {
@@ -64,7 +64,7 @@ func (r *RideSharingApp) StopRide(input *StopRideInput) error {
 	}
 
 	// rider is not on ride anymore
-	rider.GetOffRide()
+	rider.GetOffRide(input.Destination)
 
 	return nil
 }
