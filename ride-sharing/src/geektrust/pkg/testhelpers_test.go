@@ -94,5 +94,5 @@ func newDriver(driverId string, x float64, y float64) *driver.Driver {
 
 func newRider(riderId string, x float64, y float64) *rider.Rider {
 	loc := location.New(x, y)
-	return rider.NewRider(riderId, loc, false)
+	return rider.New(riderId, loc, false)
 }

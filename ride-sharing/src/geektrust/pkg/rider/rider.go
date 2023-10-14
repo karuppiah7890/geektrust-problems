@@ -8,7 +8,7 @@ type Rider struct {
 	isOnRide bool
 }
 
-func NewRider(id string, loc *location.Location, isOnRide bool) *Rider {
+func New(id string, loc *location.Location, isOnRide bool) *Rider {
 	return &Rider{
 		id:       id,
 		location: loc,
