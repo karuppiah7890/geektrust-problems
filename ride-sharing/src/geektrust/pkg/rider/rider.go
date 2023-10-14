@@ -1,8 +1,7 @@
-package pkg
+package rider
 
 import "geektrust/pkg/location"
 
-// TODO: move Rider into it's own package called rider
 type Rider struct {
 	id       string
 	location *location.Location

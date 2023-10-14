@@ -4,6 +4,7 @@ import (
 	"geektrust/pkg"
 	"geektrust/pkg/driver"
 	"geektrust/pkg/location"
+	"geektrust/pkg/rider"
 	"testing"
 )
 
@@ -68,13 +69,13 @@ func addDriver(t *testing.T, rideSharingApp *pkg.RideSharingApp, driver *driver.
 	}
 }
 
-func addRiders(t *testing.T, rideSharingApp *pkg.RideSharingApp, riders []*pkg.Rider) {
+func addRiders(t *testing.T, rideSharingApp *pkg.RideSharingApp, riders []*rider.Rider) {
 	for _, rider := range riders {
 		addRider(t, rideSharingApp, rider)
 	}
 }
 
-func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *pkg.Rider) {
+func addRider(t *testing.T, rideSharingApp *pkg.RideSharingApp, rider *rider.Rider) {
 	input := &pkg.AddRiderInput{
 		RiderId:  rider.GetID(),
 		Location: rider.GetLocation().Clone(),
@@ -91,7 +92,7 @@ func newDriver(driverId string, x float64, y float64) *driver.Driver {
 	return driver.New(driverId, loc, true)
 }
 
-func newRider(riderId string, x float64, y float64) *pkg.Rider {
+func newRider(riderId string, x float64, y float64) *rider.Rider {
 	loc := location.New(x, y)
-	return pkg.NewRider(riderId, loc, false)
+	return rider.NewRider(riderId, loc, false)
 }

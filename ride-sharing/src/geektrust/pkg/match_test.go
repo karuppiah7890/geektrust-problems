@@ -3,13 +3,14 @@ package pkg_test
 import (
 	"geektrust/pkg"
 	"geektrust/pkg/driver"
+	"geektrust/pkg/rider"
 
 	"testing"
 )
 
 type TestCase struct {
 	drivers        []*driver.Driver
-	riders         []*pkg.Rider
+	riders         []*rider.Rider
 	matchTestCases []MatchTestCase
 }
 
@@ -31,7 +32,7 @@ func TestMatchRiderWithDriver(t *testing.T) {
 					newDriver("D2", 4, 5),
 					newDriver("D3", 2, 2),
 				},
-				riders: []*pkg.Rider{
+				riders: []*rider.Rider{
 					newRider("R1", 0, 0),
 				},
 				matchTestCases: []MatchTestCase{
@@ -50,7 +51,7 @@ func TestMatchRiderWithDriver(t *testing.T) {
 					newDriver("D2", 2, 3),
 					newDriver("D3", 4, 2),
 				},
-				riders: []*pkg.Rider{
+				riders: []*rider.Rider{
 					newRider("R1", 3, 5),
 					newRider("R2", 1, 1),
 				},

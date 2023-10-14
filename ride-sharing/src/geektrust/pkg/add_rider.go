@@ -3,6 +3,7 @@ package pkg
 import (
 	"fmt"
 	"geektrust/pkg/location"
+	"geektrust/pkg/rider"
 )
 
 type AddRiderInput struct {
@@ -17,7 +18,7 @@ func (r *RideSharingApp) AddRider(input *AddRiderInput) error {
 		return fmt.Errorf("a rider with id %s already exists", riderId)
 	}
 
-	r.riders[riderId] = NewRider(riderId, input.Location.Clone(), false)
+	r.riders[riderId] = rider.NewRider(riderId, input.Location.Clone(), false)
 
 	return nil
 }

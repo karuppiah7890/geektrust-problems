@@ -5,6 +5,7 @@ import (
 	"geektrust/pkg"
 	"geektrust/pkg/driver"
 	"geektrust/pkg/location"
+	"geektrust/pkg/rider"
 	"testing"
 )
 
@@ -16,7 +17,7 @@ func TestStopRide(t *testing.T) {
 			newDriver("D2", 4, 5),
 			newDriver("D3", 2, 2),
 		})
-		addRiders(t, rideSharingApp, []*pkg.Rider{newRider("R1", 0, 0)})
+		addRiders(t, rideSharingApp, []*rider.Rider{newRider("R1", 0, 0)})
 
 		rideId := "RIDE-001"
 		riderId := "R1"
@@ -99,7 +100,7 @@ func TestStopRide(t *testing.T) {
 				newDriver("D2", 4, 5),
 				newDriver("D3", 2, 2),
 			})
-			addRiders(t, rideSharingApp, []*pkg.Rider{newRider("R1", 0, 0)})
+			addRiders(t, rideSharingApp, []*rider.Rider{newRider("R1", 0, 0)})
 
 			rideId := "RIDE-001"
 			riderId := "R1"
