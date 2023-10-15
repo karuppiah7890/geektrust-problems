@@ -44,7 +44,7 @@ func processFile(file *os.File) {
 			startRide(c, rideSharingApp, inputLineNumber, commandInput)
 
 		case "STOP_RIDE":
-			stopRide(c, rideSharingApp, inputLineNumber, commandInput)
+			stopRide(rideSharingApp, inputLineNumber, commandInput)
 
 		case "BILL":
 			bill(rideSharingApp, inputLineNumber, commandInput)
