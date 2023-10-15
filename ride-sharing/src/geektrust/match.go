@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"geektrust/cmd/context"
 	"geektrust/pkg"
 )
 
@@ -10,7 +11,7 @@ const MAX_MATCHED_DRIVERS = 5
 const NO_DRIVERS_AVAILABLE = "NO_DRIVERS_AVAILABLE"
 const DRIVERS_MATCHED = "DRIVERS_MATCHED"
 
-func match(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
+func match(c *context.Context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
 	numberOfInputs := len(commandInput)
 	if numberOfInputs != 1 {
 		panic(fmt.Sprintf("expected exactly 1 inputs for match command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
@@ -30,10 +31,10 @@ func match(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, 
 	}
 
 	if len(idsOfMatchedDrivers) == 0 {
-		c.storeDriverOptionsForRider(riderId, idsOfMatchedDrivers)
+		c.StoreDriverOptionsForRider(riderId, idsOfMatchedDrivers)
 		fmt.Println(NO_DRIVERS_AVAILABLE)
 	} else {
-		c.storeDriverOptionsForRider(riderId, idsOfMatchedDrivers)
+		c.StoreDriverOptionsForRider(riderId, idsOfMatchedDrivers)
 		fmt.Print(DRIVERS_MATCHED)
 		for _, driverId := range idsOfMatchedDrivers {
 			fmt.Printf(" %s", driverId)

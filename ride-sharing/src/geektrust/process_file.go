@@ -3,13 +3,14 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"geektrust/cmd/context"
 	"geektrust/pkg"
 	"os"
 	"strings"
 )
 
 func processFile(file *os.File) {
-	c := newContext()
+	c := context.NewContext()
 	rideSharingApp := pkg.NewRideSharingApp()
 
 	scanner := bufio.NewScanner(file)

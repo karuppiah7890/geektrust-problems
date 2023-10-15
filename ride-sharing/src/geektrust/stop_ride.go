@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"geektrust/cmd/context"
 	"geektrust/pkg"
 	"geektrust/pkg/location"
 	"strconv"
@@ -10,7 +11,7 @@ import (
 
 const RIDE_STOPPED = "RIDE_STOPPED"
 
-func stopRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
+func stopRide(c *context.Context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
 	numberOfInputs := len(commandInput)
 	if numberOfInputs != 4 {
 		panic(fmt.Sprintf("expected exactly 4 inputs for stop ride command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))

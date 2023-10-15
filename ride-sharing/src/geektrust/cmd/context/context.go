@@ -1,8 +1,8 @@
-package main
+package context
 
 import "fmt"
 
-type context struct {
+type Context struct {
 	riderDetails *riderDetails
 }
 
@@ -10,15 +10,15 @@ type riderDetails struct {
 	driverOptionsForRider map[string][]string
 }
 
-func newContext() *context {
-	return &context{
+func NewContext() *Context {
+	return &Context{
 		riderDetails: &riderDetails{
 			driverOptionsForRider: make(map[string][]string),
 		},
 	}
 }
 
-func (c *context) getDriverOptionsForRider(riderId string) ([]string, error) {
+func (c *Context) GetDriverOptionsForRider(riderId string) ([]string, error) {
 	checkContext(c)
 	driverOptions, ok := c.riderDetails.driverOptionsForRider[riderId]
 	if !ok {
@@ -28,17 +28,17 @@ func (c *context) getDriverOptionsForRider(riderId string) ([]string, error) {
 	return driverOptions, nil
 }
 
-func (c *context) storeDriverOptionsForRider(riderId string, driverOptions []string) {
+func (c *Context) StoreDriverOptionsForRider(riderId string, driverOptions []string) {
 	checkContext(c)
 	c.riderDetails.driverOptionsForRider[riderId] = driverOptions
 }
 
-func (c *context) deleteDriverOptionsForRider(riderId string) {
+func (c *Context) DeleteDriverOptionsForRider(riderId string) {
 	checkContext(c)
 	delete(c.riderDetails.driverOptionsForRider, riderId)
 }
 
-func checkContext(c *context) {
+func checkContext(c *Context) {
 	if c == nil {
 		panic("expected context to not be empty but it is empty")
 	}

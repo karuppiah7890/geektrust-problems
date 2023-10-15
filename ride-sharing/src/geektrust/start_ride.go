@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"geektrust/cmd/context"
 	"geektrust/pkg"
 	"strconv"
 )
@@ -10,7 +11,7 @@ import (
 const INVALID_RIDE = "INVALID_RIDE"
 const RIDE_STARTED = "RIDE_STARTED"
 
-func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
+func startRide(c *context.Context, rideSharingApp *pkg.RideSharingApp, inputLineNumber int, commandInput []string) {
 	numberOfInputs := len(commandInput)
 	if numberOfInputs != 3 {
 		panic(fmt.Sprintf("expected exactly 3 inputs for start ride command in line %d, but got %d inputs", inputLineNumber, numberOfInputs))
@@ -50,7 +51,7 @@ func startRide(c *context, rideSharingApp *pkg.RideSharingApp, inputLineNumber i
 		}
 	}
 
-	c.deleteDriverOptionsForRider(riderId)
+	c.DeleteDriverOptionsForRider(riderId)
 
 	fmt.Printf("%v %v\n", RIDE_STARTED, rideId)
 }
@@ -63,10 +64,10 @@ func isKnownErrorForStartRide(err error) bool {
 		errors.Is(err, pkg.ErrRiderOnRide)
 }
 
-func getDriverIdFromOptions(c *context, riderId string, optionNumber int64) (string, bool) {
-	driverOptions, err := c.getDriverOptionsForRider(riderId)
+func getDriverIdFromOptions(c *context.Context, riderId string, optionNumber int64) (string, bool) {
+	driverOptions, err := c.GetDriverOptionsForRider(riderId)
 	if err != nil {
-		if errors.Is(err, ErrDriverOptionsUnavailable) {
+		if errors.Is(err, context.ErrDriverOptionsUnavailable) {
 			panic(fmt.Sprintf("driver options unavailable error occurred: %v. maybe MATCH command was not called first", err))
 		} else {
 			panic(fmt.Sprintf("unknown error occurred while getting driver options for rider: %v", err))
