@@ -30,11 +30,11 @@ func match(c *context.Context, rideSharingApp *pkg.RideSharingApp, inputLineNumb
 		panic(fmt.Sprintf("error occurred while trying to match rider with nearest available drivers in line %d: %v", inputLineNumber, err))
 	}
 
+	c.StoreDriverOptionsForRider(riderId, idsOfMatchedDrivers)
+
 	if len(idsOfMatchedDrivers) == 0 {
-		c.StoreDriverOptionsForRider(riderId, idsOfMatchedDrivers)
 		fmt.Println(NO_DRIVERS_AVAILABLE)
 	} else {
-		c.StoreDriverOptionsForRider(riderId, idsOfMatchedDrivers)
 		fmt.Print(DRIVERS_MATCHED)
 		for _, driverId := range idsOfMatchedDrivers {
 			fmt.Printf(" %s", driverId)
