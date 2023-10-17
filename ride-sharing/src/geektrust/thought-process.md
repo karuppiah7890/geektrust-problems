@@ -6,24 +6,24 @@ Every driver has a driver status. The possible values for a driver staus are - N
 
 Aim:
 - Great Readability
-    - No magic numbers
-    - No magic constants
-    - Compact methods and functions
-    - Expressive Code
+  - No magic numbers
+  - No magic constants
+  - Compact methods and functions
+  - Expressive Code
 - Great Maintainability
-    - No Code Duplication
+  - No Code Duplication
 - Great Object Modelling
-    - OOPS
-    - Encapsulation
+  - OOPS
+  - Encapsulation
 - Correctness
-    - Correct Output
+  - Correct Output
 - Tests
-    - Clear tests
-    - Good amount of unit tests
-    - Good test coverage
+  - Clear tests
+  - Good amount of unit tests
+  - Good test coverage
 - Build
-    - No syntax errors
-    - Build should be clean and successful
+  - No syntax errors
+  - Build should be clean and successful
 
 ---
 
@@ -67,7 +67,7 @@ everywhere would mean lot of such statements -
 
 ```golang
 if err != nil {
-    return err
+  return err
 }
 ```
 
@@ -295,15 +295,94 @@ based on the known information?
 ---
 
 TODO:
+- What should each command do and NOT do?
+  - Add Rider command
+    - It should ONLY add a new rider and do nothing else
+    - It should have access only to check if there's an existing rider with same ID,
+      and access to add a new rider. It should not have access to do anything else
+    - It should NOT modify any details about any existing rider(s)
+    - It should NOT modify any details of the new rider once the new rider is added
+  - Add Driver command
+    - It should ONLY add a new driver and do nothing else
+    - It should have access only to check if there's an existing driver with same ID,
+      and access to add a new driver. It should not have access to do anything else
+    - It should NOT modify any details about any existing driver(s)
+    - It should NOT modify any details of the new driver once the new driver is added
+  - Match command
+    - It should ONLY find matches, that is drivers, for a rider and do nothing else
+    - It should have access only to the following. It should not have access to do anything else
+      - check if there's a rider with the given ID
+      - get the location of the rider
+      - get the location of all the drivers
+    - It should NOT modify any details about any existing rider(s) or driver(s)
+    - It should ONLY have read access. No write access to anything!
+  - Start Ride command
+    - It should ONLY start a rider with rider and driver and do nothing else
+    - It should have access only to the following. It should not have access to do anything else
+      - check if there's an existing ride with the given ID, to return ride-id already exists error
+      - check if there's a rider with the given ID
+      - check if there's a driver with the given ID
+      - check if the rider is already on a ride
+      - check if the driver is already on a ride and hence not available for the new ride
+      - start a new ride and store it's details
+      - mark the driver as unavailable for any other rides
+      - mark the rider to be on a ride
+    - It should NOT modify any other details about any existing rider(s) or driver(s)
+      - like their id
+      - 
+    - It should ONLY have read access. No write access to anything!
+
+- What are the different kinds of actions one can do in this app?
+  - Add rider with ID and location details
+  - Add driver with ID and location details
+  - Match rider with nearest available drivers
+    - that is, given a location (rider's location),
+      give the list of drivers, matched drivers,
+      in a particular radius
+  - Get rider given an ID
+  - Get driver given an ID
+  - Add / Start a new ride
+  - Mark a driver as unavailable for ride
+  - Mark a driver as available for a new ride
+  - Mark a rider as already on a ride
+  - Mark a rider that they are off the ride
+  - Get details of whether a driver is
+    available or unavailable for a ride
+  - Get details of whether a rider is
+    already on a ride or not
+  - Stop a ride
+  - Calculate bill for a given ride
+  - Change the current location of the rider
+  
+  - Change the current location of the driver
+  
+- Move rider is-on-ride details to ride-sharing-app
+  - This way, the is-on-ride setter will be gone from rider
+  - But then nothing much is left in rider struct then. And
+    it doesn't make sense for rider struct and rider package
+    to exist 🤔
+- Move rider location details to ride-sharing-app
+  - This way, the location setter will be gone from rider
+  - But then nothing much is left in rider struct then. And
+    it doesn't make sense for rider struct and rider package
+    to exist 🤔
+- Move driver is-on-ride / not-available details to ride-sharing-app
+  - This way, the is-on-ride / not-available setter will be
+    gone from driver
+  - But then nothing much is left in driver struct then. And
+    it doesn't make sense for driver struct and driver package
+    to exist 🤔
+- Check all TODOs
 - Check exported fields
 - Check exported types
+- Check setter methods
 - move some of the functions and methods in `main` to something inside `cmd`. For example `context` can go into a package under `cmd` called `ctx`
 - move `driver`, `rider`, `ride` into packages of their own under `pkg`. It makes more sense
 - Too many `panic`s all over the code. Check if the usage is correct and if and where
-  `recover` would be required
+`recover` would be required
 - rename `context` in `main` package to `database`? or `db`?
-    - as it's more of a database storing stuff
+  - as it's more of a database storing stuff
 - Simplify code at `main` package level
-    - `start_ride.go` is very messy
+  - `start_ride.go` is very messy
 - Better error handling for different scenarios
 - Integration testing
